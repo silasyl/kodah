@@ -16,6 +16,7 @@
   --text: #FFFFFF; --text-secondary: #B1A9CA; --text-muted: #7D7491;
   --accent: #FF7E67; --accent-dim: #F05D43; --accent-glow: rgba(255, 126, 103, 0.15);
   --accent-glow-strong: rgba(255, 126, 103, 0.3);
+  --green: #00E87B; --green-glow: rgba(0, 232, 123, 0.15); --green-glow-strong: rgba(0, 232, 123, 0.3);
   --serif: 'DM Serif Display', Georgia, serif;
   --mono: 'JetBrains Mono', 'Fira Code', monospace;
   --sans: 'Outfit', -apple-system, sans-serif;
@@ -137,17 +138,19 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
 .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 700px; margin: 0 auto; }
 .pricing-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 40px 32px; display: flex; flex-direction: column; transition: all 0.3s; }
 .pricing-card:hover { transform: translateY(-4px); }
-.pricing-card.featured { border-color: var(--accent); background: rgba(0, 232, 123, 0.03); position: relative; }
-.pricing-card.featured::before { content: 'RECOMMENDED'; position: absolute; top: -11px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; background: var(--accent); color: var(--bg); padding: 3px 14px; border-radius: 100px; font-weight: 600; }
+.pricing-card.featured { border-color: #00E87B; background: rgba(0, 232, 123, 0.03); position: relative; }
+.pricing-card.featured::before { content: 'RECOMMENDED'; position: absolute; top: -11px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; background: #00E87B; color: var(--bg); padding: 3px 14px; border-radius: 100px; font-weight: 600; white-space: nowrap; }
 .pricing-tier { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
-.pricing-card.featured .pricing-tier { color: var(--accent-dim); }
+.pricing-card.featured .pricing-tier { color: #00E87B; }
+.pricing-card .btn-primary, .pricing-card .btn-secondary { width: 100%; text-align: center; display: block; }
+.pricing-card.featured .btn-primary { background: #00E87B; color: var(--bg); }
+.pricing-card.featured .btn-primary:hover { background: #00ff8a; box-shadow: 0 0 30px rgba(0, 232, 123, 0.3); }
 .pricing-price { font-family: var(--mono); font-size: 2.4rem; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.03em; }
 .pricing-price span { font-size: 0.9rem; font-weight: 400; color: var(--text-muted); }
 .pricing-desc { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 28px; line-height: 1.5; }
 .pricing-features { list-style: none; margin-bottom: 32px; flex: 1; }
 .pricing-features li { padding: 8px 0; font-size: 0.88rem; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 10px; }
 .pricing-features li::before { content: '→'; color: var(--accent); font-family: var(--mono); font-size: 0.82rem; flex-shrink: 0; margin-top: 1px; }
-.pricing-card .btn-primary, .pricing-card .btn-secondary { width: 100%; text-align: center; display: block; }
 .enterprise-note { text-align: center; margin-top: 36px; color: var(--text-muted); font-size: 0.92rem; }
 .enterprise-note a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(0, 232, 123, 0.3); transition: border-color 0.2s; }
 .enterprise-note a:hover { border-color: var(--accent); }
@@ -168,6 +171,9 @@ body.js-ready .reveal { opacity: 0; transform: translateY(24px); }
 body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
 @media (max-width: 900px) { .stats-bar .container { grid-template-columns: repeat(2, 1fr); } .stat-item:nth-child(2)::after { display: none; } .code-section .container, .claim-grid { grid-template-columns: 1fr; gap: 40px; } .moat-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; } .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; } .cost-row { grid-template-columns: 100px 1fr 60px; gap: 12px; } .cost-row-label { font-size: 0.8rem; } .nav-links { display: none; } }
 @media (max-width: 600px) { .hero h1 { font-size: 2.4rem; } .hero-actions { flex-direction: column; align-items: center; } .stats-bar .container { grid-template-columns: 1fr 1fr; } section { padding: 80px 0; } .hero { padding: 140px 0 60px; } .cost-row { grid-template-columns: 80px 1fr 50px; } }
+.stat-number { font-size: 1.8rem; }
+.stat-label { font-size: 0.72rem; }
+.stat-item { padding: 32px 12px; }
 </style>
 </head>
 <body>
@@ -574,7 +580,7 @@ function animateNumbers() {
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       const current = target * eased;
-      el.textContent = prefix + (isDecimal ? current.toFixed(3) : Math.round(current)) + suffix;
+      el.textContent = prefix + (isDecimal ? (target >= 1 ? parseFloat(current.toFixed(1)).toString() : current.toFixed(3)) : Math.round(current)) + suffix;
       if (progress < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
