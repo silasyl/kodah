@@ -114,6 +114,7 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
 .model-tag { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; padding: 3px 10px; border-radius: 4px; display: inline-block; }
 .model-tag.flagship { background: rgba(255, 95, 87, 0.1); color: #ff8a82; border: 1px solid rgba(255, 95, 87, 0.15); }
 .model-tag.efficient { background: var(--accent-glow); color: var(--accent); border: 1px solid rgba(0, 232, 123, 0.15); }
+.compute-tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.04em; padding: 2px 7px; border-radius: 4px; background: rgba(0,232,123,0.1); color: var(--green); border: 1px solid rgba(0,232,123,0.2); margin-left: 6px; vertical-align: middle; }
 .benchmark-note { text-align: center; margin-top: 24px; font-size: 0.82rem; color: var(--text-muted); font-style: italic; }
 .cost-section { padding: 120px 0; }
 .cost-section h2 { font-family: var(--serif); font-size: 2.8rem; text-align: center; letter-spacing: -0.02em; margin-bottom: 12px; }
@@ -194,13 +195,13 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
   <div class="container">
     <div class="hero-badge">
       <span class="pulse"></span>
-      Outperforming flagship AI on real-world production code — at 1/100th the cost
+      51% SWE-bench resolve rate — $0.045 compute cost per issue
     </div>
     <h1>Elite Performance.<br><em>Infrastructure</em> Pricing.</h1>
     <p class="hero-sub">
       Kodah is the most cost-efficient bug resolution engine on the market.
-      Engineered to resolve complex production issues with elite precision at a flat $0.045 per fix. 
-      Stop burning tokens on flagship models; start shipping.
+      Engineered to resolve complex production issues with elite precision.
+      Send a repo URL and an issue — get a production-ready patch back.
     </p>
     <div class="hero-actions">
       <a href="register.html" class="btn-primary">Get Started →</a>
@@ -312,7 +313,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
         <div class="claim-card">
           <div class="claim-number">$0.045</div>
           <div class="claim-detail">
-            <h4>Total Cost per Issue</h4>
+            <h4>Compute Cost per Issue</h4>
             <p>Context building + agent reasoning combined. Not a typo.</p>
           </div>
         </div>
@@ -320,7 +321,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
           <div class="claim-number">100x</div>
           <div class="claim-detail">
             <h4>Economic Efficiency</h4>
-            <p>Better results than agents costing $5.00+ per run.</p>
+            <p>Lower compute cost than agents spending $5.00+ per run.</p>
           </div>
         </div>
       </div>
@@ -358,8 +359,8 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
       </div>
       <div class="moat-card reveal">
         <div class="moat-icon">💰</div>
-        <h3>25x Cheaper</h3>
-        <p>$0.045 per issue — while competitors burn $0.50–$1.00 on flagship API calls for worse results. Scale without the budget anxiety.</p>
+        <h3>38x Lower Compute Cost</h3>
+        <p>$0.045 compute cost per issue — while equivalent frontier approaches burn $1.70+. The efficiency gap is architectural, not accidental.</p>
       </div>
       <div class="moat-card reveal">
         <div class="moat-icon">⚙️</div>
@@ -374,7 +375,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
   <div class="container">
     <h2 class="reveal">Kodah vs. <em>2026 Frontier Models</em></h2>
     <p class="benchmark-sub reveal">
-      Results on real-world production code backlogs. While flagship models focus on brute-force reasoning, Kodah focuses on architectural precision.
+      Results on real-world production code backlogs. Cost/Issue reflects compute cost — the raw infrastructure spend per resolved issue, not service pricing.
     </p>
     <div class="benchmark-table-wrap reveal">
       <table class="benchmark-table">
@@ -382,7 +383,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
           <tr>
             <th>System / Model</th>
             <th>Resolve Rate</th>
-            <th>Cost / Issue</th>
+            <th>Compute Cost / Issue</th>
             <th>Efficiency</th>
           </tr>
         </thead>
@@ -408,7 +409,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
           <tr class="highlight-row">
             <td><strong>Kodah</strong></td>
             <td class="score">51.0%</td>
-            <td><strong>$0.045</strong></td>
+            <td><strong>$0.045</strong> <span class="compute-tag">compute</span></td>
             <td><strong>11.3x</strong></td>
           </tr>
           <tr>
@@ -421,7 +422,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
       </table>
     </div>
     <p class="benchmark-note reveal">
-      <strong>Note:</strong> Efficiency = Resolved issues per dollar, normalized to Aider baseline. Competitor costs are <em>est.</em> based on average token usage for production-scale issues. 
+      <strong>Note:</strong> Efficiency = resolved issues per dollar of compute, normalized to Aider baseline. Competitor costs are <em>est.</em> based on average token usage for production-scale issues.
       <br>Kodah results are strictly <strong>zero-shot</strong>. Future updates with execution feedback loops are expected to push resolution rates beyond 65%.
     </p>
   </div>
@@ -431,7 +432,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
   <div class="container">
     <h2 class="reveal">The math is <em>absurd.</em></h2>
     <p class="cost-sub reveal">
-      Kodah costs 10–30x less per fix than systems using brute-force flagship models.
+      Kodah's architecture costs 38x less to run than flagship model approaches — for a 11% difference in resolve rate.
     </p>
     <div class="cost-bars reveal">
       <div class="cost-row">
@@ -473,24 +474,25 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
   </div>
   </div>
     <p class="benchmark-note reveal">
-      <strong>Note:</strong> Competitor costs are <em>est.</em> based on average token usage for production-scale issues.
+      <strong>Note:</strong> Competitor costs are <em>est.</em> based on average token usage for production-scale issues.<br>
+      Compute cost per issue — infrastructure spend, not service price
     </p>
   </div>
 </section>
 
 <section class="pricing-section" id="pricing">
   <div class="container">
-    <h2 class="reveal">API <em>Early Access.</em></h2>
+    <h2 class="reveal">Simple, <em>honest</em> pricing.</h2>
     <p class="pricing-sub reveal">
-      We are currently onboarding selected engineering teams to our API beta. Join the waitlist to secure your spot.
+      Start free. Pay only for what you use. No subscriptions, no commitments.
     </p>
     <div class="pricing-grid">
       <div class="pricing-card reveal">
-        <div class="pricing-tier">Developer Sandbox</div>
+        <div class="pricing-tier">Free</div>
         <div class="pricing-price">$0</div>
-        <div class="pricing-desc">Test Kodah's capabilities on your own codebase during the beta period.</div>
+        <div class="pricing-desc">10 free fixes every month. No credit card required.</div>
         <ul class="pricing-features">
-          <li>Limited monthly fixes</li>
+          <li>10 fixes per month, resets monthly</li>
           <li>Public and private repos</li>
           <li>Full diff output via API</li>
           <li>Community support</li>
@@ -498,18 +500,21 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
         <a href="register.html" class="btn-secondary">Create Free Account</a>
       </div>
       <div class="pricing-card featured reveal">
-        <div class="pricing-tier">Production API</div>
-        <div class="pricing-price">Usage-Based</div>
-        <div class="pricing-desc">For teams looking to integrate autonomous bug fixing into their CI/CD.</div>
+        <div class="pricing-tier">Pro</div>
+        <div class="pricing-price">$0.50 <span>/ fix</span></div>
+        <div class="pricing-desc">Pay as you go. Credits never expire.</div>
         <ul class="pricing-features">
-          <li>High-volume rate limits</li>
-          <li>Enterprise-grade SLAs</li>
-          <li>Priority integration support</li>
-          <li>Pay only for generated patches</li>
+          <li>10 free fixes included monthly</li>
+          <li>Credits top-up anytime</li>
+          <li>Public and private repos</li>
+          <li>Priority support</li>
         </ul>
         <a href="register.html" class="btn-primary">Get Started →</a>
       </div>
     </div>
+    <p class="enterprise-note">
+      Need high-volume or on-premise? <a href="mailto:contact@kodah.io">Talk to us</a>.
+    </p>
   </div>
 </section>
 
@@ -517,7 +522,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
   <div class="cta-glow"></div>
   <div class="container">
     <h2 class="reveal">Stop triaging.<br>Start <em>shipping.</em></h2>
-    <p class="reveal">Reserve your spot in the early access program today.</p>
+    <p class="reveal">10 free fixes every month. No credit card required.</p>
     <div class="hero-actions reveal">
       <a href="register.html" class="btn-primary">Get Started →</a>
     </div>
@@ -533,27 +538,24 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// Enable JS-driven animations only when JS is confirmed working
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
 document.body.classList.add('js-ready');
 
-// Scroll reveal
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) entry.target.classList.add('visible');
   });
-}, { threshold: 0.08, rootMargin: '0px 0px 0px 0px' });
+}, { threshold: 0.08 });
 reveals.forEach(el => observer.observe(el));
 
-// Stagger cards
 document.querySelectorAll('.moat-grid, .pricing-grid').forEach(grid => {
   grid.querySelectorAll('.reveal').forEach((card, i) => {
     card.style.transitionDelay = `${i * 0.1}s`;
   });
 });
 
-// Animate stat numbers
 function animateNumbers() {
   document.querySelectorAll('.stat-number').forEach(el => {
     const text = el.textContent;
@@ -572,7 +574,7 @@ function animateNumbers() {
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       const current = target * eased;
-      el.textContent = prefix + (isDecimal ? current.toFixed(2) : Math.round(current)) + suffix;
+      el.textContent = prefix + (isDecimal ? current.toFixed(3) : Math.round(current)) + suffix;
       if (progress < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
@@ -585,13 +587,11 @@ const statsObserver = new IntersectionObserver((entries) => {
 const statsBar = document.querySelector('.stats-bar');
 if (statsBar) statsObserver.observe(statsBar);
 
-// Cost bars animation
 const costBars = document.querySelectorAll('.cost-bar-fill');
 const costObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      const target = entry.target.dataset.target;
-      entry.target.style.width = target + '%';
+      entry.target.style.width = entry.target.dataset.target + '%';
     }
   });
 }, { threshold: 0.3 });
