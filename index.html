@@ -107,8 +107,8 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
 .benchmark-table th { padding: 16px 28px; text-align: left; font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid var(--border); }
 .benchmark-table td { padding: 18px 28px; border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); }
 .benchmark-table tr:last-child td { border-bottom: none; }
-.benchmark-table .highlight-row { background: rgba(0, 232, 123, 0.04); }
-.benchmark-table .highlight-row td { color: var(--text); font-weight: 500; border-bottom: 1px solid rgba(0, 232, 123, 0.1); }
+.benchmark-table .highlight-row { background: rgba(0, 232, 123, 0.08); border-left: 2px solid #00E87B; }
+.benchmark-table .highlight-row td { color: #00E87B; font-weight: 600; border-bottom: 1px solid rgba(0, 232, 123, 0.15); }
 .score { font-family: var(--mono); font-weight: 600; }
 .highlight-row .score { color: var(--accent); }
 .model-tag { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; padding: 3px 10px; border-radius: 4px; display: inline-block; }
@@ -125,10 +125,10 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
 .cost-bar-track { height: 36px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
 .cost-bar-fill { height: 100%; border-radius: 7px; transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
 .cost-bar-fill.expensive { background: linear-gradient(90deg, rgba(255, 95, 87, 0.25), rgba(255, 95, 87, 0.4)); border-right: 2px solid rgba(255, 95, 87, 0.6); }
-.cost-bar-fill.cheap { background: linear-gradient(90deg, var(--accent-glow), var(--accent-glow-strong)); border-right: 2px solid var(--accent); }
+.cost-bar-fill.cheap { background: linear-gradient(90deg, rgba(0, 232, 123, 0.3), rgba(0, 232, 123, 0.6)); border-right: 2px solid #00E87B; }
 .cost-row-price { font-family: var(--mono); font-size: 0.9rem; font-weight: 500; }
 .cost-row-price.high { color: #ff8a82; }
-.cost-row-price.low { color: var(--accent); }
+.cost-row-price.low { color: #00E87B; }
 .cost-caption { text-align: center; margin-top: 32px; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
 .pricing-section h2 { font-family: var(--serif); font-size: 2.8rem; text-align: center; letter-spacing: -0.02em; margin-bottom: 12px; }
 .pricing-section h2 em { font-style: italic; color: var(--accent); }
@@ -253,16 +253,17 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
       </div>
       <div class="code-body">
 <span class="line"><span class="c-comment"># Send any issue — public or private repo</span></span>
-<span class="line"><span class="c-var">curl</span> <span class="c-string">-X POST https://api.kodah.io/v1/fix</span> \</span>
-<span class="line">  <span class="c-keyword">-H</span> <span class="c-string">"Authorization: Bearer sk_live_..."</span> \</span>
+<span class="line"><span class="c-var">curl</span> <span class="c-string">-X POST https://api.kodah.io/jobs</span> \</span>
+<span class="line">  <span class="c-keyword">-H</span> <span class="c-string">"x-api-key: kdh_..."</span> \</span>
 <span class="line">  <span class="c-keyword">-d</span> <span class="c-bracket">{</span></span>
 <span class="line">    <span class="c-string">"repo_url"</span>: <span class="c-string">"github.com/your-org/your-repo"</span>,</span>
-<span class="line">    <span class="c-string">"issue"</span>: <span class="c-string">"TypeError in parse_config</span></span>
+<span class="line">    <span class="c-string">"task"</span>: <span class="c-string">"fix"</span>,</span>
+<span class="line">    <span class="c-string">"description"</span>: <span class="c-string">"TypeError in parse_config</span></span>
 <span class="line"><span class="c-string">      when input contains nested dicts"</span></span>
 <span class="line">  <span class="c-bracket">}</span></span>
 <span class="line"></span>
 <span class="line"><span class="c-comment"># Get the patch</span></span>
-<span class="line"><span class="c-var">curl</span> <span class="c-string">https://api.kodah.io/v1/jobs/</span><span class="c-func">job_3kf9</span><span class="c-string">/diff</span></span>
+<span class="line"><span class="c-var">curl</span> <span class="c-string">https://api.kodah.io/jobs/</span><span class="c-func">job_3kf9</span><span class="c-string">/diff</span></span>
 <span class="line"></span>
 <span class="line"><span class="c-response">--- a/src/config.py</span></span>
 <span class="line"><span class="c-response">+++ b/src/config.py</span></span>
@@ -494,7 +495,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
           <li>Full diff output via API</li>
           <li>Community support</li>
         </ul>
-        <a href="mailto:register.html" class="btn-secondary">Create Free Account</a>
+        <a href="register.html" class="btn-secondary">Create Free Account</a>
       </div>
       <div class="pricing-card featured reveal">
         <div class="pricing-tier">Production API</div>

@@ -24,8 +24,6 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); font
 ::selection { background: var(--accent); color: var(--bg); }
 .grid-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 80px 80px; }
 .grain { position: fixed; inset: 0; z-index: 1; opacity: 0.3; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); }
-
-/* Nav — identical to landing page */
 nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 28px; backdrop-filter: blur(20px) saturate(1.4); -webkit-backdrop-filter: blur(20px) saturate(1.4); background: rgba(8, 9, 12, 0.75); border-bottom: 1px solid var(--border-subtle); }
 nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
 .logo { font-family: var(--mono); font-weight: 600; font-size: 1.15rem; letter-spacing: -0.02em; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
@@ -35,86 +33,41 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
 .nav-links a:hover { color: var(--text); }
 .nav-cta { font-family: var(--mono); font-size: 0.82rem !important; color: var(--accent) !important; border: 1px solid rgba(255, 126, 103, 0.3); padding: 7px 18px; border-radius: 6px; transition: all 0.25s !important; }
 .nav-cta:hover { background: var(--accent-glow); border-color: var(--accent); }
-
-/* Page layout */
 .page-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 100px 28px 60px; position: relative; z-index: 2; }
 .hero-glow { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 700px; max-width: 100vw; height: 500px; background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%); pointer-events: none; z-index: 1; }
-
-/* Card */
-.register-card { width: 100%; max-width: 480px; animation: fadeInUp 0.5s ease both; }
+.register-card { width: 100%; max-width: 460px; animation: fadeInUp 0.5s ease both; }
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-.card-header { margin-bottom: 40px; }
+.card-header { margin-bottom: 36px; }
 .card-badge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.75rem; color: var(--accent); background: var(--accent-glow); border: 1px solid rgba(255, 126, 103, 0.15); padding: 5px 14px; border-radius: 100px; margin-bottom: 24px; letter-spacing: 0.03em; }
 .card-badge .pulse { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s ease infinite; flex-shrink: 0; }
 @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 126, 103, 0.4); } 50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(255, 126, 103, 0); } }
 .card-header h1 { font-family: var(--serif); font-size: 2.6rem; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 12px; }
 .card-header h1 em { font-style: italic; color: var(--accent); }
 .card-header p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; }
-
-/* Form */
 .register-form { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 36px; }
-.form-group { margin-bottom: 20px; }
-.form-label { display: block; font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
-.form-input { width: 100%; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; font-family: var(--sans); font-size: 0.95rem; color: var(--text); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
-.form-input::placeholder { color: var(--text-muted); }
-.form-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
-.form-input.error { border-color: #ff5f57; box-shadow: 0 0 0 3px rgba(255, 95, 87, 0.15); }
-
-.btn-submit { width: 100%; font-family: var(--mono); font-size: 0.9rem; font-weight: 500; color: var(--bg); background: var(--accent); border: none; padding: 14px 32px; border-radius: 8px; cursor: pointer; transition: all 0.25s; letter-spacing: 0.01em; margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 10px; }
-.btn-submit:hover:not(:disabled) { background: #ff9b88; box-shadow: 0 0 30px var(--accent-glow-strong); transform: translateY(-1px); }
-.btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-.form-note { margin-top: 16px; font-size: 0.8rem; color: var(--text-muted); text-align: center; line-height: 1.5; }
-.form-note a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid var(--border); transition: color 0.2s, border-color 0.2s; }
-.form-note a:hover { color: var(--text); border-color: var(--text-muted); }
-
-/* Error message */
-.form-error { background: rgba(255, 95, 87, 0.08); border: 1px solid rgba(255, 95, 87, 0.2); border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; font-size: 0.88rem; color: #ff8a82; display: none; }
-.form-error.visible { display: block; }
-
-/* Success state */
-.success-state { display: none; }
-.success-state.visible { display: block; }
-.register-form.hidden { display: none; }
-
-.success-icon { width: 56px; height: 56px; background: var(--accent-glow); border: 1px solid rgba(255, 126, 103, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; }
-.success-state h2 { font-family: var(--serif); font-size: 1.8rem; letter-spacing: -0.02em; margin-bottom: 10px; }
-.success-state h2 em { font-style: italic; color: var(--accent); }
-.success-state p { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin-bottom: 24px; }
-
-.key-display { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 8px; }
-.key-label { font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
-.key-value { font-family: var(--mono); font-size: 0.82rem; color: var(--accent); word-break: break-all; line-height: 1.6; }
-.key-warning { font-family: var(--mono); font-size: 0.75rem; color: var(--accent-dim); background: rgba(255, 126, 103, 0.08); border: 1px solid rgba(255, 126, 103, 0.15); border-radius: 6px; padding: 10px 14px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
-
-.btn-copy { width: 100%; font-family: var(--mono); font-size: 0.85rem; font-weight: 400; color: var(--text-secondary); background: transparent; border: 1px solid var(--border); padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: all 0.25s; margin-bottom: 12px; }
-.btn-copy:hover { color: var(--text); border-color: var(--text-muted); background: var(--bg-elevated); }
-.btn-copy.copied { color: var(--accent); border-color: rgba(255, 126, 103, 0.3); }
-
-.btn-docs { width: 100%; font-family: var(--mono); font-size: 0.9rem; font-weight: 500; color: var(--bg); background: var(--accent); border: none; padding: 13px 24px; border-radius: 8px; cursor: pointer; transition: all 0.25s; text-decoration: none; display: block; text-align: center; }
-.btn-docs:hover { background: #ff9b88; box-shadow: 0 0 30px var(--accent-glow-strong); }
-
-/* Spinner */
-.spinner { width: 16px; height: 16px; border: 2px solid rgba(26, 22, 37, 0.3); border-top-color: var(--bg); border-radius: 50%; animation: spin 0.7s linear infinite; display: none; }
-.spinner.visible { display: block; }
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* Free tier note below card */
+.btn-github { width: 100%; font-family: var(--mono); font-size: 0.9rem; font-weight: 500; color: var(--text); background: #24292e; border: 1px solid rgba(255,255,255,0.1); padding: 14px 24px; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.25s; display: flex; align-items: center; justify-content: center; gap: 12px; }
+.btn-github:hover { background: #2f363d; border-color: rgba(255,255,255,0.2); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.github-icon { width: 20px; height: 20px; fill: var(--text); flex-shrink: 0; }
+.divider { display: flex; align-items: center; gap: 16px; margin: 24px 0; }
+.divider-line { flex: 1; height: 1px; background: var(--border); }
+.divider-text { font-family: var(--mono); font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.06em; }
+.what-you-get { display: flex; flex-direction: column; gap: 10px; }
+.what-item { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: var(--text-secondary); }
+.what-item::before { content: '→'; color: var(--accent); font-family: var(--mono); font-size: 0.82rem; flex-shrink: 0; }
+.form-note { margin-top: 20px; font-size: 0.8rem; color: var(--text-muted); text-align: center; line-height: 1.5; }
+.form-note a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid var(--border); transition: color 0.2s; }
+.form-note a:hover { color: var(--text); }
 .free-note { margin-top: 24px; text-align: center; }
 .free-note-inner { display: inline-flex; align-items: center; gap: 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 24px; }
 .free-note-item { font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
 .free-note-item span { color: var(--accent); font-family: var(--mono); font-size: 0.78rem; }
 .free-note-sep { width: 1px; height: 16px; background: var(--border); }
-
-/* Footer */
 footer { border-top: 1px solid var(--border); padding: 32px 28px; position: relative; z-index: 2; }
 footer .footer-inner { max-width: 1180px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
 .footer-left { font-family: var(--mono); font-size: 0.82rem; color: var(--text-muted); }
 .footer-links { display: flex; gap: 28px; list-style: none; }
 .footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--text-secondary); }
-
 @media (max-width: 600px) {
   .page-wrap { padding: 90px 16px 40px; }
   .register-form { padding: 24px; }
@@ -155,63 +108,40 @@ footer .footer-inner { max-width: 1180px; margin: 0 auto; display: flex; justify
         Free account — no credit card required
       </div>
       <h1>Start fixing bugs<br>at <em>infrastructure</em> cost.</h1>
-      <p>Create your account and get your API key in seconds. 10 free fixes every month, no card required.</p>
+      <p>10 free fixes every month. Connect your GitHub account to get your API key in seconds.</p>
     </div>
 
-    <!-- Form state -->
-    <div class="register-form" id="registerForm">
-      <div class="form-error" id="formError"></div>
+    <div class="register-form">
+      <a class="btn-github" href="#" onclick="loginWithGithub(); return false;">
+        <svg class="github-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        Continue with GitHub
+      </a>
 
-      <div class="form-group">
-        <label class="form-label" for="email">Email address</label>
-        <input
-          class="form-input"
-          type="email"
-          id="email"
-          placeholder="you@company.com"
-          autocomplete="email"
-          required
-        />
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-text">what you get</div>
+        <div class="divider-line"></div>
       </div>
 
-      <button class="btn-submit" id="submitBtn" onclick="handleRegister()">
-        <span id="btnText">Create Account →</span>
-        <div class="spinner" id="spinner"></div>
-      </button>
+      <div class="what-you-get">
+        <div class="what-item">10 free fixes every month, forever</div>
+        <div class="what-item">Your personal API key, shown once</div>
+        <div class="what-item">Full diff output — public and private repos</div>
+        <div class="what-item">Top up with credits anytime, no subscription</div>
+      </div>
 
       <p class="form-note">
-        By creating an account you agree to our
-        <a href="mailto:contact@kodah.io">terms of service</a>.
-        Already have an account? <a href="mailto:contact@kodah.io">Contact us</a>.
+        By continuing you agree to our <a href="mailto:contact@kodah.io">terms of service</a>.
       </p>
-    </div>
-
-    <!-- Success state -->
-    <div class="success-state" id="successState">
-      <div class="register-form">
-        <div class="success-icon">✓</div>
-        <h2>Your key is <em>ready.</em></h2>
-        <p>Copy your API key now. For security, it will not be shown again after you leave this page.</p>
-
-        <div class="key-display">
-          <div class="key-label">Your API Key</div>
-          <div class="key-value" id="apiKeyDisplay"></div>
-        </div>
-
-        <div class="key-warning">
-          ⚠ This key will not be shown again. Store it somewhere safe before continuing.
-        </div>
-
-        <button class="btn-copy" id="copyBtn" onclick="copyKey()">Copy API Key</button>
-        <a href="/" class="btn-docs">Back to kodah.io →</a>
-      </div>
     </div>
 
     <div class="free-note">
       <div class="free-note-inner">
         <div class="free-note-item"><span>10</span> free fixes / month</div>
         <div class="free-note-sep"></div>
-        <div class="free-note-item"><span>$0.05</span> per fix after that</div>
+        <div class="free-note-item"><span>$0.50</span> per fix after that</div>
         <div class="free-note-sep"></div>
         <div class="free-note-item"><span>No</span> card required</div>
       </div>
@@ -230,100 +160,16 @@ footer .footer-inner { max-width: 1180px; margin: 0 auto; display: flex; justify
 </footer>
 
 <script>
-  // ── Config ────────────────────────────────────────────────────────────────
-  const API_BASE = "https://api.kodah.io";  // change to your Hetzner URL before deploy
+  const GITHUB_CLIENT_ID = "Ov23lidQFifD3DPdWCEx";
 
-  // ── State ─────────────────────────────────────────────────────────────────
-  let generatedKey = "";
-
-  // ── Register ──────────────────────────────────────────────────────────────
-  async function handleRegister() {
-    const email     = document.getElementById("email").value.trim();
-    const submitBtn = document.getElementById("submitBtn");
-    const btnText   = document.getElementById("btnText");
-    const spinner   = document.getElementById("spinner");
-    const formError = document.getElementById("formError");
-    const emailInput = document.getElementById("email");
-
-    // Clear previous errors
-    formError.classList.remove("visible");
-    emailInput.classList.remove("error");
-
-    // Basic validation
-    if (!email || !email.includes("@")) {
-      showError("Please enter a valid email address.");
-      emailInput.classList.add("error");
-      emailInput.focus();
-      return;
-    }
-
-    // Loading state
-    submitBtn.disabled = true;
-    btnText.style.display = "none";
-    spinner.classList.add("visible");
-
-    try {
-      const res = await fetch(`${API_BASE}/auth/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await res.json();
-
-      if (res.status === 409) {
-        showError("This email is already registered. Contact us if you need a new key.");
-        emailInput.classList.add("error");
-        return;
-      }
-
-      if (!res.ok) {
-        showError(data.detail || "Something went wrong. Please try again.");
-        return;
-      }
-
-      // Success
-      generatedKey = data.api_key;
-      document.getElementById("apiKeyDisplay").textContent = generatedKey;
-      document.getElementById("registerForm").classList.add("hidden");
-      document.getElementById("successState").classList.add("visible");
-
-    } catch (err) {
-      showError("Could not reach the server. Please try again in a moment.");
-    } finally {
-      submitBtn.disabled = false;
-      btnText.style.display = "inline";
-      spinner.classList.remove("visible");
-    }
+  function loginWithGithub() {
+    const params = new URLSearchParams({
+      client_id:    GITHUB_CLIENT_ID,
+      scope:        "user:email",
+      redirect_uri: window.location.origin + "/callback.html",
+    });
+    window.location.href = "https://github.com/login/oauth/authorize?" + params.toString();
   }
-
-  // ── Copy key ──────────────────────────────────────────────────────────────
-  async function copyKey() {
-    const btn = document.getElementById("copyBtn");
-    try {
-      await navigator.clipboard.writeText(generatedKey);
-      btn.textContent = "Copied ✓";
-      btn.classList.add("copied");
-      setTimeout(() => {
-        btn.textContent = "Copy API Key";
-        btn.classList.remove("copied");
-      }, 2500);
-    } catch {
-      btn.textContent = "Select and copy manually";
-    }
-  }
-
-  // ── Error helper ──────────────────────────────────────────────────────────
-  function showError(msg) {
-    const el = document.getElementById("formError");
-    el.textContent = msg;
-    el.classList.add("visible");
-  }
-
-  // ── Enter key support ─────────────────────────────────────────────────────
-  document.getElementById("email").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") handleRegister();
-  });
 </script>
 
 </body>
