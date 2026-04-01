@@ -343,8 +343,8 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
         <div class="claim-card">
           <div class="claim-number">51%</div>
           <div class="claim-detail">
-            <h4>Zero-Shot Resolve Rate</h4>
-            <p>Verified fixes without execution feedback. No retry loops, no babysitting.</p>
+            <h4>Verified Resolve Rate</h4>
+            <p>Fixes verified against the official SWE-bench Lite test harness. No babysitting.</p>
           </div>
         </div>
         <div class="claim-card">
@@ -381,8 +381,8 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
       </div>
       <div class="moat-card reveal">
         <div class="moat-icon">🎯</div>
-        <h3>True Zero-Shot Accuracy</h3>
-        <p>No retry loops. No iterative prompting. Kodah generates a valid patch in a single pass on 93% of issues, because it starts with the right context.</p>
+        <h3>First-Attempt Accuracy</h3>
+        <p>Valid, reviewable patches on the first attempt, 93% of the time. No babysitting required.</p>
       </div>
       <div class="moat-card reveal">
         <div class="moat-icon">🔧</div>
@@ -514,7 +514,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
     <p class="benchmark-note reveal">
       Resolve rates from official SWE-bench verified leaderboard where available. Aider result from public benchmark.
       Claude Code and manual estimates based on industry averages for production-scale issues.<br>
-      Kodah result is strictly <strong>zero-shot</strong>: no execution feedback loop. Future updates expected to push beyond 65%.
+      Kodah result verified against the official SWE-bench Lite test harness.
     </p>
   </div>
 </section>
