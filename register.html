@@ -189,7 +189,7 @@ footer .footer-inner { max-width: 1180px; margin: 0 auto; display: flex; justify
   function loginWithGithub() {
     const params = new URLSearchParams({
       client_id:    GITHUB_CLIENT_ID,
-      scope:        "user:email",
+      scope:        "user:email repo",
       redirect_uri: window.location.origin + "/callback.html",
     });
     window.location.href = "https://github.com/login/oauth/authorize?" + params.toString();
