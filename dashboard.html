@@ -213,7 +213,7 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
 
   // Check if key is stored in sessionStorage
   window.addEventListener('load', () => {
-    const stored = sessionStorage.getItem('kodah_api_key');
+    const stored = localStorage.getItem('kodah_api_key');
     if (stored) {
       currentApiKey = stored;
       document.getElementById('apiKeyInput').value = stored;
@@ -246,7 +246,7 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
 
       const data = await res.json();
       currentApiKey = key;
-      sessionStorage.setItem('kodah_api_key', key);
+      localStorage.setItem('kodah_api_key', key);
 
       // Populate dashboard
       const emailParts = data.email.split('@');
@@ -306,7 +306,7 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
   }
 
   function logout() {
-    sessionStorage.removeItem('kodah_api_key');
+    localStorage.removeItem('kodah_api_key');
     currentApiKey = '';
     document.getElementById('apiKeyInput').value = '';
     document.getElementById('dashboardScreen').style.display = 'none';

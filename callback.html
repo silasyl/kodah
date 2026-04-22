@@ -142,6 +142,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); min-
 
       // Success
       generatedKey = data.api_key;
+      localStorage.setItem('kodah_api_key', data.api_key);
       document.getElementById("apiKeyDisplay").textContent = generatedKey;
       document.getElementById("githubUsername").textContent = data.github_username || data.email;
       show("stateSuccess");
