@@ -211,7 +211,7 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
   const API_BASE = "https://api.kodah.io";
   let currentApiKey = "";
 
-  // Check if key is stored in sessionStorage
+  // Check if key is stored in localStorage
   window.addEventListener('load', () => {
     const stored = localStorage.getItem('kodah_api_key');
     if (stored) {
@@ -221,10 +221,10 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
     }
   });
 
-  async function loadDashboard() {
+  async function loadDashboard(keyParam = null) {
     const btn = document.getElementById('loginBtn');
     const errorEl = document.getElementById('loginError');
-    const key = document.getElementById('apiKeyInput').value.trim();
+    const key = keyParam || document.getElementById('apiKeyInput').value.trim();
 
     if (!key) return;
 
@@ -318,7 +318,7 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
 
   // Allow Enter key to submit
   document.getElementById('apiKeyInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') loadDashboard();
+    if (e.key === 'Enter') loadDashboard(stored);
   });
 </script>
 
