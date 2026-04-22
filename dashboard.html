@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kodah | Dashboard</title>
+<meta name="description" content="Manage your Kodah account, credits, and API key.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1625; --bg-elevated: #241F33; --bg-card: #2D2640; --bg-card-hover: #372F4D;
+  --surface: #241F33; --border: #4A3F66; --border-subtle: #241F33;
+  --text: #FFFFFF; --text-secondary: #B1A9CA; --text-muted: #7D7491;
+  --accent: #FF7E67; --accent-dim: #F05D43; --accent-glow: rgba(255, 126, 103, 0.15);
+  --accent-glow-strong: rgba(255, 126, 103, 0.3);
+  --green: #00E87B; --green-glow: rgba(0, 232, 123, 0.15);
+  --serif: 'DM Serif Display', Georgia, serif;
+  --mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --sans: 'Outfit', -apple-system, sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.65; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+::selection { background: var(--accent); color: var(--bg); }
+.grid-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 80px 80px; }
+.grain { position: fixed; inset: 0; z-index: 1; opacity: 0.3; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); }
+.hero-glow { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 700px; max-width: 100vw; height: 400px; background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%); pointer-events: none; z-index: 1; }
+
+/* Nav */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 28px; backdrop-filter: blur(20px) saturate(1.4); background: rgba(8, 9, 12, 0.75); border-bottom: 1px solid var(--border-subtle); }
+nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.logo { font-family: var(--mono); font-weight: 600; font-size: 1.15rem; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+.nav-links a { font-size: 0.88rem; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta { font-family: var(--mono); font-size: 0.82rem !important; color: var(--accent) !important; border: 1px solid rgba(255, 126, 103, 0.3); padding: 7px 18px; border-radius: 6px; transition: all 0.25s !important; }
+.nav-cta:hover { background: var(--accent-glow); border-color: var(--accent); }
+
+/* Page */
+.page { max-width: 800px; margin: 0 auto; padding: 100px 28px 60px; position: relative; z-index: 2; }
+
+/* API Key input screen */
+.login-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: calc(100vh - 64px); padding: 40px 0; }
+.login-card { width: 100%; max-width: 480px; }
+.login-badge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.75rem; color: var(--accent); background: var(--accent-glow); border: 1px solid rgba(255, 126, 103, 0.15); padding: 5px 14px; border-radius: 100px; margin-bottom: 24px; letter-spacing: 0.03em; }
+.login-card h1 { font-family: var(--serif); font-size: 2.4rem; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 10px; }
+.login-card h1 em { font-style: italic; color: var(--accent); }
+.login-card p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 32px; }
+.login-form { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 32px; }
+.input-label { font-family: var(--mono); font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; display: block; }
+.input-field { width: 100%; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 13px 16px; font-family: var(--mono); font-size: 0.85rem; color: var(--text); outline: none; transition: border-color 0.2s; margin-bottom: 16px; }
+.input-field:focus { border-color: var(--accent); }
+.input-field::placeholder { color: var(--text-muted); }
+.btn-primary { width: 100%; font-family: var(--mono); font-size: 0.9rem; font-weight: 500; color: var(--bg); background: var(--accent); border: none; padding: 13px 24px; border-radius: 8px; cursor: pointer; transition: all 0.25s; }
+.btn-primary:hover { background: #ff9b88; box-shadow: 0 0 30px var(--accent-glow-strong); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.login-note { margin-top: 16px; text-align: center; font-size: 0.82rem; color: var(--text-muted); }
+.login-note a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(255,126,103,0.3); }
+.error-msg { font-family: var(--mono); font-size: 0.8rem; color: var(--accent-dim); background: rgba(255, 126, 103, 0.08); border: 1px solid rgba(255, 126, 103, 0.15); border-radius: 6px; padding: 10px 14px; margin-top: 12px; display: none; }
+
+/* Dashboard screen */
+.dashboard-screen { display: none; }
+.dash-header { margin-bottom: 40px; padding-top: 20px; }
+.dash-header h1 { font-family: var(--serif); font-size: 2.4rem; letter-spacing: -0.02em; margin-bottom: 4px; }
+.dash-header h1 em { font-style: italic; color: var(--accent); }
+.dash-header p { color: var(--text-muted); font-family: var(--mono); font-size: 0.82rem; }
+
+/* Stats grid */
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+.stat-card-label { font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+.stat-card-value { font-family: var(--mono); font-size: 1.8rem; font-weight: 600; letter-spacing: -0.03em; color: var(--text); }
+.stat-card-value.green { color: var(--green); }
+.stat-card-value.accent { color: var(--accent); }
+.stat-card-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+
+/* Credits section */
+.section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 32px; margin-bottom: 20px; }
+.section-title { font-family: var(--mono); font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; }
+.credit-packages { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.credit-pkg { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px; padding: 20px; cursor: pointer; transition: all 0.25s; position: relative; }
+.credit-pkg:hover { border-color: rgba(255,126,103,0.3); background: var(--bg-card-hover); transform: translateY(-2px); }
+.credit-pkg-price { font-family: var(--mono); font-size: 1.6rem; font-weight: 600; color: var(--text); letter-spacing: -0.03em; margin-bottom: 4px; }
+.credit-pkg-desc { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px; }
+.credit-pkg-btn { width: 100%; font-family: var(--mono); font-size: 0.82rem; color: var(--accent); background: var(--accent-glow); border: 1px solid rgba(255,126,103,0.2); padding: 10px; border-radius: 6px; cursor: pointer; transition: all 0.25s; }
+.credit-pkg-btn:hover { background: rgba(255,126,103,0.25); border-color: var(--accent); }
+.credit-pkg-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* API Key section */
+.api-key-row { display: flex; align-items: center; gap: 12px; }
+.api-key-display { flex: 1; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; font-family: var(--mono); font-size: 0.82rem; color: var(--accent); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.btn-secondary { font-family: var(--mono); font-size: 0.82rem; color: var(--text-secondary); background: transparent; border: 1px solid var(--border); padding: 11px 20px; border-radius: 8px; cursor: pointer; transition: all 0.25s; white-space: nowrap; }
+.btn-secondary:hover { color: var(--text); border-color: var(--text-muted); background: var(--bg-elevated); }
+.btn-secondary.copied { color: var(--accent); border-color: rgba(255,126,103,0.3); }
+
+/* Logout */
+.dash-footer { margin-top: 32px; text-align: center; }
+.btn-logout { font-family: var(--mono); font-size: 0.82rem; color: var(--text-muted); background: transparent; border: none; cursor: pointer; transition: color 0.2s; }
+.btn-logout:hover { color: var(--text-secondary); }
+
+/* Loading spinner */
+.spinner { width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.2); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; display: inline-block; vertical-align: middle; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 600px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .credit-packages { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="grain"></div>
+<div class="hero-glow"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <img src="small_logo.png" alt="Kodah" style="width:114px; height:40px; mix-blend-mode:screen; border-radius:6px;">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#results">Results</a></li>
+      <li><a href="/#benchmark">Benchmark</a></li>
+      <li><a href="/#pricing">Pricing</a></li>
+      <li><a href="register.html" class="nav-cta">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- Login Screen -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <div class="login-badge">Dashboard</div>
+      <h1>Your <em>account.</em></h1>
+      <p>Enter your API key to view your credits and manage your account.</p>
+      <div class="login-form">
+        <label class="input-label" for="apiKeyInput">API Key</label>
+        <input class="input-field" id="apiKeyInput" type="password" placeholder="kdh_..." autocomplete="off" />
+        <button class="btn-primary" id="loginBtn" onclick="loadDashboard()">View Dashboard →</button>
+        <div class="error-msg" id="loginError">Invalid API key. Please check and try again.</div>
+      </div>
+      <p class="login-note">Don't have an account? <a href="register.html">Get started free →</a></p>
+    </div>
+  </div>
+
+  <!-- Dashboard Screen -->
+  <div class="dashboard-screen" id="dashboardScreen">
+    <div class="dash-header">
+      <h1>Good to see you, <em id="userEmail">...</em></h1>
+      <p id="userPlan">free plan · 10 fixes/month included</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card-label">Free Credits</div>
+        <div class="stat-card-value accent" id="freeCredits">—</div>
+        <div class="stat-card-sub">resets monthly</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Paid Balance</div>
+        <div class="stat-card-value green" id="paidBalance">—</div>
+        <div class="stat-card-sub">$0.50 per fix</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Fix Price</div>
+        <div class="stat-card-value">$0.50</div>
+        <div class="stat-card-sub">flat rate</div>
+      </div>
+    </div>
+
+    <!-- Add Credits -->
+    <div class="section">
+      <div class="section-title">Add Credits</div>
+      <div class="credit-packages">
+        <div class="credit-pkg">
+          <div class="credit-pkg-price">$5.00</div>
+          <div class="credit-pkg-desc">10 fixes · $0.50 each</div>
+          <button class="credit-pkg-btn" onclick="addCredits('price_1TOmKRH7MUoJuXU1c4WOmwNf', this)">Add $5.00 →</button>
+        </div>
+        <div class="credit-pkg">
+          <div class="credit-pkg-price">$10.00</div>
+          <div class="credit-pkg-desc">20 fixes · $0.50 each</div>
+          <button class="credit-pkg-btn" onclick="addCredits('price_1TOmM7H7MUoJuXU1xVDLvcpl', this)">Add $10.00 →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Key -->
+    <div class="section">
+      <div class="section-title">API Key</div>
+      <div class="api-key-row">
+        <div class="api-key-display" id="apiKeyDisplay">kdh_••••••••••••••••••••••</div>
+        <button class="btn-secondary" id="copyKeyBtn" onclick="copyKey()">Copy</button>
+      </div>
+    </div>
+
+    <div class="dash-footer">
+      <button class="btn-logout" onclick="logout()">← Sign out</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const API_BASE = "https://api.kodah.io";
+  let currentApiKey = "";
+
+  // Check if key is stored in sessionStorage
+  window.addEventListener('load', () => {
+    const stored = sessionStorage.getItem('kodah_api_key');
+    if (stored) {
+      currentApiKey = stored;
+      document.getElementById('apiKeyInput').value = stored;
+      loadDashboard();
+    }
+  });
+
+  async function loadDashboard() {
+    const btn = document.getElementById('loginBtn');
+    const errorEl = document.getElementById('loginError');
+    const key = document.getElementById('apiKeyInput').value.trim();
+
+    if (!key) return;
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>';
+    errorEl.style.display = 'none';
+
+    try {
+      const res = await fetch(`${API_BASE}/me`, {
+        headers: { 'X-API-Key': key }
+      });
+
+      if (!res.ok) {
+        errorEl.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'View Dashboard →';
+        return;
+      }
+
+      const data = await res.json();
+      currentApiKey = key;
+      sessionStorage.setItem('kodah_api_key', key);
+
+      // Populate dashboard
+      const emailParts = data.email.split('@');
+      document.getElementById('userEmail').textContent = emailParts[0];
+      document.getElementById('userPlan').textContent =
+        `${data.plan} plan · ${data.free_credits} free fix${data.free_credits !== 1 ? 'es' : ''} remaining this month`;
+      document.getElementById('freeCredits').textContent = data.free_credits;
+      document.getElementById('paidBalance').textContent = `$${parseFloat(data.paid_balance).toFixed(2)}`;
+      document.getElementById('apiKeyDisplay').textContent = key;
+
+      // Show dashboard
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('dashboardScreen').style.display = 'block';
+
+    } catch (err) {
+      errorEl.textContent = 'Could not reach the server. Please try again.';
+      errorEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'View Dashboard →';
+    }
+  }
+
+  async function addCredits(priceId, btn) {
+    btn.disabled = true;
+    btn.textContent = 'Loading...';
+
+    try {
+      const res = await fetch(`${API_BASE}/billing/checkout?price_id=${priceId}`, {
+        method: 'POST',
+        headers: { 'X-API-Key': currentApiKey }
+      });
+
+      const data = await res.json();
+      if (data.checkout_url) {
+        window.location.href = data.checkout_url;
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Try again';
+      }
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Try again';
+    }
+  }
+
+  async function copyKey() {
+    const btn = document.getElementById('copyKeyBtn');
+    try {
+      await navigator.clipboard.writeText(currentApiKey);
+      btn.textContent = 'Copied ✓';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copy';
+        btn.classList.remove('copied');
+      }, 2500);
+    } catch {
+      btn.textContent = 'Select manually';
+    }
+  }
+
+  function logout() {
+    sessionStorage.removeItem('kodah_api_key');
+    currentApiKey = '';
+    document.getElementById('apiKeyInput').value = '';
+    document.getElementById('dashboardScreen').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'flex';
+  }
+
+  // Allow Enter key to submit
+  document.getElementById('apiKeyInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') loadDashboard();
+  });
+</script>
+
+</body>
+</html>
