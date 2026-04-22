@@ -263,7 +263,7 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
       errorEl.textContent = 'Could not reach the server. Please try again.';
       errorEl.style.display = 'block';
       btn.disabled = false;
-      btn.textContent = 'View Dashboard →';
+      btn.innerHTML = 'View Dashboard →';
     }
   }
 
@@ -311,6 +311,9 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
     document.getElementById('apiKeyInput').value = '';
     document.getElementById('dashboardScreen').style.display = 'none';
     document.getElementById('loginScreen').style.display = 'flex';
+    const btn = document.getElementById('loginBtn');
+    btn.disabled = false;
+    btn.innerHTML = 'View Dashboard →';
   }
 
   // Allow Enter key to submit
