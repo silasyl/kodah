@@ -90,18 +90,9 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); min-
       <div class="key-label">Your API Key</div>
       <div class="key-value" id="apiKeyDisplay"></div>
     </div>
-    <div class="key-warning">⚠ Store this key somewhere safe. It cannot be recovered — only replaced.</div>
+    <div class="key-warning">⚠ Save this key. You can always view it again in your <a href="/dashboard.html" style="color: var(--accent-dim);">Dashboard</a>.</div>
     <button class="btn-copy" id="copyBtn" onclick="copyKey()">Copy API Key</button>
     <a href="/dashboard.html" class="btn-home">Go to Dashboard →</a>
-  </div>
-
-  <!-- Already registered -->
-  <div class="state hidden" id="stateExists">
-    <div class="error-icon">👋</div>
-    <h2>Already <em>registered.</em></h2>
-    <p>This GitHub account already has a Kodah API key. If you've lost your key, contact us and we'll issue a new one.</p>
-    <a href="/dashboard.html" class="btn-retry">Go to Dashboard →</a>
-    <p class="existing-note">Or <a href="/">return to kodah.io</a></p>
   </div>
 
   <!-- Error -->
@@ -119,7 +110,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); min-
   let generatedKey = "";
 
   function show(id) {
-    ["stateLoading", "stateSuccess", "stateExists", "stateError"]
+    ["stateLoading", "stateSuccess", "stateError"]
       .forEach(s => document.getElementById(s).classList.add("hidden"));
     document.getElementById(id).classList.remove("hidden");
   }
@@ -142,11 +133,6 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); min-
       });
 
       const data = await res.json();
-
-      if (res.status === 409) {
-        show("stateExists");
-        return;
-      }
 
       if (!res.ok) {
         document.getElementById("errorMessage").textContent = data.detail || "Registration failed. Please try again.";

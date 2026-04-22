@@ -152,7 +152,6 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
   <div class="dashboard-screen" id="dashboardScreen">
     <div class="dash-header">
       <h1>Good to see you, <em id="userEmail">...</em></h1>
-      <p id="userPlan">free plan · 10 fixes/month included</p>
     </div>
 
     <!-- Stats -->
@@ -251,8 +250,6 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
       // Populate dashboard
       const emailParts = data.email.split('@');
       document.getElementById('userEmail').textContent = emailParts[0];
-      document.getElementById('userPlan').textContent =
-        `${data.plan} plan · ${data.free_credits} free fix${data.free_credits !== 1 ? 'es' : ''} remaining this month`;
       document.getElementById('freeCredits').textContent = data.free_credits;
       document.getElementById('paidBalance').textContent = `$${parseFloat(data.paid_balance).toFixed(2)}`;
       document.getElementById('apiKeyDisplay').textContent = key;
