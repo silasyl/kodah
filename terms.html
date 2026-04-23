@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kodah | Terms of Service</title>
+<meta name="description" content="Kodah Terms of Service.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1625; --bg-elevated: #241F33; --bg-card: #2D2640;
+  --border: #4A3F66; --border-subtle: #241F33;
+  --text: #FFFFFF; --text-secondary: #B1A9CA; --text-muted: #7D7491;
+  --accent: #FF7E67; --accent-glow: rgba(255, 126, 103, 0.15);
+  --serif: 'DM Serif Display', Georgia, serif;
+  --mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --sans: 'Outfit', -apple-system, sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.75; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--accent); color: var(--bg); }
+.grid-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 80px 80px; }
+.grain { position: fixed; inset: 0; z-index: 1; opacity: 0.3; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 28px; backdrop-filter: blur(20px) saturate(1.4); background: rgba(8, 9, 12, 0.75); border-bottom: 1px solid var(--border-subtle); }
+nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.logo { font-family: var(--mono); font-weight: 600; font-size: 1.15rem; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+.nav-links a { font-size: 0.88rem; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta { font-family: var(--mono); font-size: 0.82rem !important; color: var(--accent) !important; border: 1px solid rgba(255, 126, 103, 0.3); padding: 7px 18px; border-radius: 6px; transition: all 0.25s !important; }
+.nav-cta:hover { background: var(--accent-glow); border-color: var(--accent); }
+.page { max-width: 760px; margin: 0 auto; padding: 110px 28px 80px; position: relative; z-index: 2; }
+.page-header { margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+.page-header h1 { font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 12px; }
+.page-header h1 em { font-style: italic; color: var(--accent); }
+.page-header p { color: var(--text-muted); font-size: 0.88rem; font-family: var(--mono); }
+.toc { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 28px 32px; margin-bottom: 48px; }
+.toc-title { font-family: var(--mono); font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+.toc ol { list-style: none; counter-reset: toc; }
+.toc ol li { counter-increment: toc; padding: 5px 0; font-size: 0.9rem; color: var(--text-secondary); }
+.toc ol li::before { content: counter(toc) ". "; font-family: var(--mono); color: var(--accent); font-size: 0.78rem; }
+.toc ol li a { color: inherit; text-decoration: none; transition: color 0.2s; }
+.toc ol li a:hover { color: var(--text); }
+.section { margin-bottom: 48px; }
+.section h2 { font-family: var(--serif); font-size: 1.5rem; letter-spacing: -0.01em; margin-bottom: 20px; padding-top: 8px; color: var(--text); display: flex; align-items: baseline; gap: 12px; }
+.section h2 .num { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); font-style: normal; }
+.section p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 14px; }
+.section p:last-child { margin-bottom: 0; }
+.section ul { color: var(--text-secondary); font-size: 0.95rem; padding-left: 20px; margin-bottom: 14px; }
+.section ul li { margin-bottom: 8px; padding-left: 6px; }
+.section strong { color: var(--text); font-weight: 600; }
+.section a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(255,126,103,0.3); transition: border-color 0.2s; }
+.section a:hover { border-color: var(--accent); }
+.highlight-box { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+.highlight-box p { margin: 0; font-size: 0.9rem; }
+footer { border-top: 1px solid var(--border); padding: 40px 28px; position: relative; z-index: 2; margin-top: 40px; }
+footer .footer-inner { max-width: 760px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-left { font-family: var(--mono); font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; }
+.footer-links { display: flex; gap: 24px; list-style: none; }
+.footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text-secondary); }
+@media (max-width: 600px) { .nav-links { display: none; } }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="grain"></div>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><img src="small_logo.png" alt="Kodah" style="width:114px;height:40px;mix-blend-mode:screen;border-radius:6px;"></a>
+    <ul class="nav-links">
+      <li><a href="/#results">Results</a></li>
+      <li><a href="/#benchmark">Benchmark</a></li>
+      <li><a href="/#pricing">Pricing</a></li>
+      <li><a href="docs.html">Docs</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="register.html" class="nav-cta">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="page">
+  <div class="page-header">
+    <h1>Terms of <em>Service</em></h1>
+    <p>Effective April 29, 2026 · Last updated April 29, 2026</p>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <ol>
+      <li><a href="#s1">Acceptance of Terms</a></li>
+      <li><a href="#s2">Description of Service</a></li>
+      <li><a href="#s3">AI-Generated Content</a></li>
+      <li><a href="#s4">Account Registration</a></li>
+      <li><a href="#s5">API Keys and Security</a></li>
+      <li><a href="#s6">Acceptable Use</a></li>
+      <li><a href="#s7">Credits, Pricing and Billing</a></li>
+      <li><a href="#s8">Data and Privacy</a></li>
+      <li><a href="#s9">Intellectual Property</a></li>
+      <li><a href="#s10">Disclaimers and Limitation of Liability</a></li>
+      <li><a href="#s11">Termination</a></li>
+      <li><a href="#s12">Governing Law</a></li>
+      <li><a href="#s13">Changes to These Terms</a></li>
+      <li><a href="#s14">Contact</a></li>
+    </ol>
+  </div>
+
+  <div class="section" id="s1">
+    <h2><span class="num">1.</span> Acceptance of Terms</h2>
+    <p>By accessing or using Kodah ("the Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree, do not use the Service.</p>
+    <p>By creating an account, you confirm that you are at least 18 years of age and have the legal capacity to enter into this agreement.</p>
+  </div>
+
+  <div class="section" id="s2">
+    <h2><span class="num">2.</span> Description of Service</h2>
+    <p>Kodah is an autonomous bug-fixing service. You submit a repository URL and an issue description via our API; our system analyzes the codebase and returns a unified diff. The Service is provided entirely via HTTP API.</p>
+    <p>All processing is performed on Kodah's infrastructure. No code is executed on your systems. The internal architecture of the Service is proprietary and not disclosed.</p>
+  </div>
+
+  <div class="section" id="s3">
+    <h2><span class="num">3.</span> AI-Generated Content</h2>
+    <p>Kodah uses large language models (LLMs) as part of its processing pipeline. As with all AI-based systems, outputs may be incomplete, incorrect, or fail to address the described issue — a phenomenon commonly referred to as "hallucination."</p>
+    <div class="highlight-box">
+      <p><strong>All patches must be reviewed and validated by a qualified engineer before being applied to any codebase.</strong> Kodah does not guarantee the correctness, completeness, or safety of any generated diff. You are solely responsible for any code changes you apply based on Kodah's output.</p>
+    </div>
+    <p>Kodah makes no representation that generated patches will pass your test suite, be free of regressions, or resolve the described issue in all cases.</p>
+  </div>
+
+  <div class="section" id="s4">
+    <h2><span class="num">4.</span> Account Registration</h2>
+    <p>To use the Service, you must create an account by authenticating through GitHub OAuth. By doing so, you authorize Kodah to access your GitHub account's email address and, if you choose to use private repositories, your repository access.</p>
+    <p>You are responsible for maintaining the confidentiality of your account credentials. Notify us immediately at <a href="mailto:contact@kodah.io">contact@kodah.io</a> if you suspect unauthorized use of your account.</p>
+    <p>One account per person or organization is permitted. Automated account creation is prohibited.</p>
+  </div>
+
+  <div class="section" id="s5">
+    <h2><span class="num">5.</span> API Keys and Security</h2>
+    <p>Upon registration, you receive a personal API key prefixed with <strong>kdh_</strong>. You are solely responsible for keeping it confidential. Do not share your key publicly, commit it to version control, or expose it in client-side code.</p>
+    <p>If your key is compromised, sign in again with GitHub to generate a new one — your previous key will be invalidated immediately. Kodah stores only a cryptographic hash of your key and cannot recover the original value.</p>
+  </div>
+
+  <div class="section" id="s6">
+    <h2><span class="num">6.</span> Acceptable Use</h2>
+    <p>You agree to use the Service only for lawful purposes. You agree <strong>not</strong> to:</p>
+    <ul>
+      <li>Submit content intended to produce malicious code, malware, or exploits</li>
+      <li>Attempt to extract, reverse-engineer, or reproduce Kodah's internal architecture, prompts, or tooling through crafted inputs</li>
+      <li>Submit repositories or content that infringes on third-party intellectual property rights</li>
+      <li>Process repositories you do not own or have explicit authorization to analyze</li>
+      <li>Circumvent or interfere with security features of the Service</li>
+      <li>Resell or sublicense the Service without prior written authorization</li>
+      <li>Use automated scripts to intentionally exhaust server resources</li>
+    </ul>
+    <p>Violation of these provisions may result in immediate account termination without refund.</p>
+  </div>
+
+  <div class="section" id="s7">
+    <h2><span class="num">7.</span> Credits, Pricing and Billing</h2>
+    <p><strong>Free tier:</strong> Every account receives 10 free fixes per calendar month, valid for public repositories only. Free fixes reset on the first day of each calendar month and do not carry over.</p>
+    <p><strong>Paid credits:</strong> Additional fixes are available by purchasing credit packages. Credits are denominated in USD and deducted at a flat rate of <strong>$0.50 per fix</strong>. Paid credits never expire and are valid for both public and private repositories.</p>
+    <p><strong>Billing:</strong> Payments are processed securely by Stripe. Kodah does not store your payment card information. Credits are non-refundable once consumed. If a job fails due to a system error on our side, the credit used for that job will be restored to your account.</p>
+    <p><strong>Pricing changes:</strong> We reserve the right to change pricing at any time. Changes will be communicated via email and will apply to future purchases only — credits already purchased are unaffected.</p>
+  </div>
+
+  <div class="section" id="s8">
+    <h2><span class="num">8.</span> Data and Privacy</h2>
+    <p><strong>Source code:</strong> When you submit a job, Kodah temporarily accesses the specified repository for the duration of processing only. Source code is never stored on our servers. Upon job completion, all cloned files are permanently destroyed.</p>
+    <p><strong>What we store:</strong> We retain data associated with your account and jobs, including your email address, the generated diff, language model interaction logs, and job performance metrics. This data is used to operate the Service, debug issues, and improve system performance. No source code is included in what we store.</p>
+    <p><strong>Service improvement:</strong> For jobs submitted under the free tier — which exclusively involve public repositories — anonymized interaction logs may be used to improve Kodah's systems. Jobs processed with paid credits are used solely to deliver the requested result and are not used for system improvement.</p>
+    <p><strong>Data retention:</strong> Job data is retained for up to 90 days, after which it is permanently deleted. Account data is retained for as long as your account is active.</p>
+    <p><strong>Third parties:</strong> Kodah uses third-party services including an AI language model provider (for inference), and Stripe (payment processing). No source code is transmitted to any third party.</p>
+    <p><strong>Compliance:</strong> The Service is operated in compliance with the Brazilian General Data Protection Law (LGPD) and adheres to the principles of the GDPR for users in the European Economic Area.</p>
+    <p>You may request deletion of your account and associated data at any time by contacting <a href="mailto:contact@kodah.io">contact@kodah.io</a>.</p>
+  </div>
+
+  <div class="section" id="s9">
+    <h2><span class="num">9.</span> Intellectual Property</h2>
+    <p><strong>Your code:</strong> You retain full ownership of all repositories you submit and all patches generated from them. Kodah claims no intellectual property rights over your source code or the diffs produced by the Service.</p>
+    <p><strong>Kodah's systems:</strong> The Service, including its underlying architecture, algorithms, and infrastructure, is the exclusive property of AI Frontier Tecnologia Ltda. You may not copy, modify, or create derivative works based on any part of Kodah's systems.</p>
+  </div>
+
+  <div class="section" id="s10">
+    <h2><span class="num">10.</span> Disclaimers and Limitation of Liability</h2>
+    <p>The Service is provided "as is" and "as available" without warranties of any kind, express or implied. Kodah does not warrant that the Service will be uninterrupted, error-free, or that generated patches will be correct or suitable for production use.</p>
+    <p>To the maximum extent permitted by applicable law, AI Frontier Tecnologia Ltda. shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Service, including loss of data, loss of profits, or business interruption.</p>
+    <p>Our total liability for any claim arising out of these Terms shall not exceed the amount you paid to Kodah in the 30 days preceding the claim.</p>
+  </div>
+
+  <div class="section" id="s11">
+    <h2><span class="num">11.</span> Termination</h2>
+    <p>You may terminate your account at any time by contacting us at <a href="mailto:contact@kodah.io">contact@kodah.io</a>. Upon termination, your API key will be invalidated and any unused paid credits will be forfeited.</p>
+    <p>Kodah reserves the right to suspend or terminate your account, with or without notice, for violation of these Terms or for any other reason at our sole discretion.</p>
+  </div>
+
+  <div class="section" id="s12">
+    <h2><span class="num">12.</span> Governing Law</h2>
+    <p>These Terms are governed by the laws of the Federative Republic of Brazil. Any disputes shall be subject to the exclusive jurisdiction of the courts of São Paulo, Brazil.</p>
+  </div>
+
+  <div class="section" id="s13">
+    <h2><span class="num">13.</span> Changes to These Terms</h2>
+    <p>We may update these Terms from time to time. When we do, we will revise the date at the top of this page and notify registered users via email. Continued use of the Service after changes become effective constitutes acceptance of the revised Terms.</p>
+  </div>
+
+  <div class="section" id="s14">
+    <h2><span class="num">14.</span> Contact</h2>
+    <p>Questions about these Terms? Contact us at <a href="mailto:contact@kodah.io">contact@kodah.io</a>.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">© 2026 Kodah</div>
+    <ul class="footer-links">
+      <li><a href="mailto:contact@kodah.io">Contact</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="docs.html">Docs</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

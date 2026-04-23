@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kodah | Documentation</title>
+<meta name="description" content="Kodah API Documentation — submit a repo and an issue, get a production-ready patch back.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1625; --bg-elevated: #241F33; --bg-card: #2D2640; --bg-card-hover: #372F4D;
+  --border: #4A3F66; --border-subtle: #241F33;
+  --text: #FFFFFF; --text-secondary: #B1A9CA; --text-muted: #7D7491;
+  --accent: #FF7E67; --accent-dim: #F05D43; --accent-glow: rgba(255, 126, 103, 0.15);
+  --green: #00E87B; --green-glow: rgba(0, 232, 123, 0.15);
+  --yellow: #FFD166;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --sans: 'Outfit', -apple-system, sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.75; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--accent); color: var(--bg); }
+.grid-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 80px 80px; }
+.grain { position: fixed; inset: 0; z-index: 1; opacity: 0.3; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); }
+
+/* Nav */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 28px; backdrop-filter: blur(20px) saturate(1.4); background: rgba(8, 9, 12, 0.75); border-bottom: 1px solid var(--border-subtle); }
+nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.logo { font-family: var(--mono); font-weight: 600; font-size: 1.15rem; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+.nav-links a { font-size: 0.88rem; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta { font-family: var(--mono); font-size: 0.82rem !important; color: var(--accent) !important; border: 1px solid rgba(255, 126, 103, 0.3); padding: 7px 18px; border-radius: 6px; transition: all 0.25s !important; }
+.nav-cta:hover { background: var(--accent-glow); border-color: var(--accent); }
+
+/* Layout */
+.layout { display: grid; grid-template-columns: 240px 1fr; max-width: 1180px; margin: 0 auto; padding-top: 64px; min-height: 100vh; position: relative; z-index: 2; }
+
+/* Sidebar */
+.sidebar { position: sticky; top: 64px; height: calc(100vh - 64px); overflow-y: auto; padding: 40px 24px 40px 28px; border-right: 1px solid var(--border-subtle); }
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.sidebar-section { margin-bottom: 32px; }
+.sidebar-label { font-family: var(--mono); font-size: 0.68rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; display: block; }
+.sidebar-nav { list-style: none; }
+.sidebar-nav li { margin-bottom: 2px; }
+.sidebar-nav a { display: block; font-size: 0.86rem; color: var(--text-muted); text-decoration: none; padding: 5px 10px; border-radius: 6px; transition: all 0.2s; border-left: 2px solid transparent; }
+.sidebar-nav a:hover { color: var(--text-secondary); background: var(--bg-elevated); }
+.sidebar-nav a.active { color: var(--accent); border-left-color: var(--accent); background: var(--accent-glow); }
+
+/* Content */
+.content { padding: 48px 48px 80px; max-width: 800px; }
+
+/* Page header */
+.page-header { margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+.page-label { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; display: block; }
+.page-header h1 { font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px; }
+.page-header h1 em { font-style: italic; color: var(--accent); }
+.page-header p { color: var(--text-secondary); font-size: 1.05rem; max-width: 580px; }
+
+/* Sections */
+.section { margin-bottom: 64px; scroll-margin-top: 80px; }
+.section h2 { font-family: var(--serif); font-size: 1.7rem; letter-spacing: -0.01em; margin-bottom: 8px; color: var(--text); }
+.section h2 em { font-style: italic; color: var(--accent); }
+.section-intro { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 28px; line-height: 1.7; }
+.section h3 { font-size: 1.05rem; font-weight: 600; margin: 32px 0 12px; color: var(--text); }
+.section p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 14px; line-height: 1.75; }
+.section ul, .section ol { color: var(--text-secondary); font-size: 0.95rem; padding-left: 20px; margin-bottom: 16px; }
+.section ul li, .section ol li { margin-bottom: 8px; padding-left: 4px; }
+.section strong { color: var(--text); font-weight: 600; }
+.section a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(255,126,103,0.3); }
+.section a:hover { border-color: var(--accent); }
+
+/* Code blocks */
+.code-block { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 20px 0; }
+.code-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--bg-card); }
+.code-lang { font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+.copy-btn { font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); background: none; border: none; cursor: pointer; padding: 2px 8px; border-radius: 4px; transition: all 0.2s; }
+.copy-btn:hover { color: var(--text); background: var(--border); }
+.copy-btn.copied { color: var(--green); }
+.code-body { padding: 20px; overflow-x: auto; }
+.code-body pre { font-family: var(--mono); font-size: 0.83rem; line-height: 1.75; color: var(--text-secondary); white-space: pre; }
+.c-comment { color: var(--text-muted); }
+.c-key { color: #c792ea; }
+.c-string { color: #c3e88d; }
+.c-num { color: #f78c6c; }
+.c-method { color: #82aaff; }
+.c-green { color: var(--green); }
+.c-accent { color: var(--accent); }
+
+/* Inline code */
+code { font-family: var(--mono); font-size: 0.83em; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 2px 6px; color: var(--accent); }
+
+/* Endpoint cards */
+.endpoint { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin: 24px 0; }
+.endpoint-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.method { font-family: var(--mono); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 5px; letter-spacing: 0.05em; }
+.method.post { background: rgba(0, 232, 123, 0.15); color: var(--green); border: 1px solid rgba(0,232,123,0.2); }
+.method.get { background: rgba(130, 170, 255, 0.15); color: #82aaff; border: 1px solid rgba(130,170,255,0.2); }
+.endpoint-path { font-family: var(--mono); font-size: 0.9rem; color: var(--text); }
+.endpoint-desc { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px; }
+.param-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+.param-table th { text-align: left; font-family: var(--mono); font-size: 0.68rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+.param-table td { padding: 10px 12px; border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); vertical-align: top; }
+.param-table tr:last-child td { border-bottom: none; }
+.param-name { font-family: var(--mono); font-size: 0.82rem; color: var(--text); }
+.param-type { font-family: var(--mono); font-size: 0.78rem; color: #c792ea; }
+.required-badge { font-family: var(--mono); font-size: 0.65rem; color: var(--accent); background: var(--accent-glow); border: 1px solid rgba(255,126,103,0.2); padding: 2px 6px; border-radius: 3px; margin-left: 6px; }
+.optional-badge { font-family: var(--mono); font-size: 0.65rem; color: var(--text-muted); background: var(--bg-elevated); border: 1px solid var(--border); padding: 2px 6px; border-radius: 3px; margin-left: 6px; }
+
+/* Status badges */
+.status-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; margin: 16px 0; }
+.status-table td { padding: 10px 12px; border-bottom: 1px solid var(--border-subtle); vertical-align: top; }
+.status-table tr:last-child td { border-bottom: none; }
+.status-code { font-family: var(--mono); font-size: 0.85rem; font-weight: 600; }
+.status-code.ok { color: var(--green); }
+.status-code.err { color: var(--accent); }
+.status-desc { color: var(--text-secondary); font-size: 0.88rem; }
+
+/* Callout boxes */
+.callout { border-radius: 8px; padding: 16px 20px; margin: 20px 0; display: flex; gap: 12px; }
+.callout.info { background: rgba(130,170,255,0.08); border: 1px solid rgba(130,170,255,0.2); }
+.callout.warning { background: rgba(255,209,102,0.08); border: 1px solid rgba(255,209,102,0.2); }
+.callout.tip { background: var(--green-glow); border: 1px solid rgba(0,232,123,0.2); }
+.callout-icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+.callout p { color: var(--text-secondary); font-size: 0.88rem; margin: 0; line-height: 1.6; }
+.callout strong { color: var(--text); }
+
+/* Job status flow */
+.status-flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 20px 0; }
+.status-pill { font-family: var(--mono); font-size: 0.78rem; padding: 6px 14px; border-radius: 20px; }
+.status-pill.queued { background: rgba(130,170,255,0.1); color: #82aaff; border: 1px solid rgba(130,170,255,0.2); }
+.status-pill.running { background: rgba(255,209,102,0.1); color: var(--yellow); border: 1px solid rgba(255,209,102,0.2); }
+.status-pill.completed { background: var(--green-glow); color: var(--green); border: 1px solid rgba(0,232,123,0.2); }
+.status-pill.failed { background: var(--accent-glow); color: var(--accent); border: 1px solid rgba(255,126,103,0.2); }
+.flow-arrow { color: var(--text-muted); font-size: 0.8rem; }
+
+footer { border-top: 1px solid var(--border); padding: 40px 28px; position: relative; z-index: 2; }
+footer .footer-inner { max-width: 1180px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-left { font-family: var(--mono); font-size: 0.82rem; color: var(--text-muted); }
+.footer-links { display: flex; gap: 24px; list-style: none; }
+.footer-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text-secondary); }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .content { padding: 32px 20px 60px; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="grain"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <img src="small_logo.png" alt="Kodah" style="width:114px; height:40px; mix-blend-mode:screen; border-radius:6px;">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#results">Results</a></li>
+      <li><a href="/#benchmark">Benchmark</a></li>
+      <li><a href="/#pricing">Pricing</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="register.html" class="nav-cta">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <span class="sidebar-label">Getting Started</span>
+      <ul class="sidebar-nav">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#quickstart">Quickstart</a></li>
+        <li><a href="#authentication">Authentication</a></li>
+        <li><a href="#credits">Credits & Limits</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-label">API Reference</span>
+      <ul class="sidebar-nav">
+        <li><a href="#submit-job">Submit a Job</a></li>
+        <li><a href="#poll-status">Poll Status</a></li>
+        <li><a href="#get-result">Get Result</a></li>
+        <li><a href="#account">Account</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-label">Guides</span>
+      <ul class="sidebar-nav">
+        <li><a href="#private-repos">Private Repos</a></li>
+        <li><a href="#polling">Polling Pattern</a></li>
+        <li><a href="#cicd">CI/CD Integration</a></li>
+        <li><a href="#errors">Error Reference</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="content">
+
+    <div class="page-header">
+      <span class="page-label">Documentation</span>
+      <h1>Kodah <em>API</em></h1>
+      <p>Submit a repository and a bug description. Get a production-ready diff back. The entire interface is a single HTTP API — no plugins, no uploads, no configuration.</p>
+    </div>
+
+    <!-- Overview -->
+    <div class="section" id="overview">
+      <h2>Overview</h2>
+      <p class="section-intro">You send a repository URL and an issue description. Kodah processes the codebase and returns a unified diff. All processing happens on Kodah's infrastructure.</p>
+
+      <h3>Base URL</h3>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">text</span></div>
+        <div class="code-body"><pre>https://api.kodah.io</pre></div>
+      </div>
+
+      <h3>How it works</h3>
+      <ol>
+        <li>You <strong>submit a job</strong> with a repo URL and issue description → receive a <code>job_id</code></li>
+        <li>You <strong>poll the status</strong> of the job until it reaches <code>completed</code> or <code>failed</code></li>
+        <li>You <strong>retrieve the diff</strong> and apply it to your codebase</li>
+      </ol>
+
+      <h3>Job lifecycle</h3>
+      <div class="status-flow">
+        <span class="status-pill queued">queued</span>
+        <span class="flow-arrow">→</span>
+        <span class="status-pill running">running</span>
+        <span class="flow-arrow">→</span>
+        <span class="status-pill completed">completed</span>
+        <span class="flow-arrow">|</span>
+        <span class="status-pill failed">failed</span>
+      </div>
+      <p>Jobs typically complete in 1–5 minutes.</p>
+    </div>
+
+    <!-- Quickstart -->
+    <div class="section" id="quickstart">
+      <h2><em>Quickstart</em></h2>
+      <p class="section-intro">Three commands to go from zero to a patch.</p>
+
+      <h3>Step 1 — Create an account</h3>
+      <p>Go to <a href="https://kodah.io/register.html">kodah.io/register.html</a> and sign in with GitHub. You will receive an API key prefixed with <code>kdh_</code>. Save it — you will need it for every request.</p>
+
+      <h3>Step 2 — Submit a job</h3>
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body"><pre><span class="c-method">curl</span> -X POST https://api.kodah.io/jobs \
+  -H <span class="c-string">"Content-Type: application/json"</span> \
+  -H <span class="c-string">"X-API-Key: kdh_your_key_here"</span> \
+  -d <span class="c-string">'{
+    "repo_url": "https://github.com/your-org/your-repo",
+    "task": "fix",
+    "description": "TypeError in calculate_total: unsupported operand type += float and str",
+    "ref": "main"
+  }'</span></pre></div>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">response</span></div>
+        <div class="code-body"><pre><span class="c-key">{</span>
+  <span class="c-string">"job_id"</span>: <span class="c-string">"74fc9334-0d1a-48a7-9936-60b9dd84a24a"</span>
+<span class="c-key">}</span></pre></div>
+      </div>
+
+      <h3>Step 3 — Poll until complete</h3>
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body"><pre><span class="c-method">curl</span> https://api.kodah.io/jobs/<span class="c-accent">74fc9334-0d1a-48a7-9936-60b9dd84a24a</span>/status \
+  -H <span class="c-string">"X-API-Key: kdh_your_key_here"</span></pre></div>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">response</span></div>
+        <div class="code-body"><pre><span class="c-key">{</span>
+  <span class="c-string">"job_id"</span>: <span class="c-string">"74fc9334-..."</span>,
+  <span class="c-string">"status"</span>: <span class="c-string">"completed"</span>,
+  <span class="c-string">"elapsed_s"</span>: <span class="c-num">87.4</span>
+<span class="c-key">}</span></pre></div>
+      </div>
+
+      <h3>Step 4 — Retrieve the diff</h3>
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body"><pre><span class="c-method">curl</span> https://api.kodah.io/jobs/<span class="c-accent">74fc9334-0d1a-48a7-9936-60b9dd84a24a</span> \
+  -H <span class="c-string">"X-API-Key: kdh_your_key_here"</span></pre></div>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">response</span></div>
+        <div class="code-body"><pre><span class="c-key">{</span>
+  <span class="c-string">"job_id"</span>: <span class="c-string">"74fc9334-..."</span>,
+  <span class="c-string">"diff"</span>: <span class="c-string">"diff --git a/src/processor.py b/src/processor.py\n--- a/src/processor.py\n+++ b/src/processor.py\n@@ -8,3 +8,3 @@\n-        total = 0\n+        total = 0.0\n         for item in items:\n-            total += item['price']\n+            total += float(item['price'])"</span>
+<span class="c-key">}</span></pre></div>
+      </div>
+    </div>
+
+    <!-- Authentication -->
+    <div class="section" id="authentication">
+      <h2>Authentication</h2>
+      <p class="section-intro">All API requests must include your API key in the <code>X-API-Key</code> header.</p>
+
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">bash</span></div>
+        <div class="code-body"><pre>X-API-Key: kdh_your_key_here</pre></div>
+      </div>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠</span>
+        <p><strong>Keep your key private.</strong> Do not commit it to version control or expose it in client-side code. If your key is compromised, sign in again at <a href="https://kodah.io/register.html">kodah.io/register.html</a> to generate a new one. Your old key will be invalidated immediately.</p>
+      </div>
+
+      <p>Requests without a valid API key return <code>401 Unauthorized</code>. Requests with a valid key but insufficient credits return <code>402 Payment Required</code>.</p>
+    </div>
+
+    <!-- Credits -->
+    <div class="section" id="credits">
+      <h2>Credits <em>&</em> Limits</h2>
+      <p class="section-intro">Kodah uses a simple credit system. Every fix costs exactly $0.50, deducted from your balance before the job starts.</p>
+
+      <h3>Free tier</h3>
+      <p>Every account receives <strong>10 free fixes per calendar month</strong>, valid for public repositories only. Free fixes reset on the first day of each month and do not carry over.</p>
+
+      <h3>Paid credits</h3>
+      <p>Purchase credits from your <a href="https://kodah.io/dashboard.html">dashboard</a>. Paid credits never expire and work on both public and private repositories.</p>
+
+      <h3>Concurrency limit</h3>
+      <p>If the server is at capacity, your request returns <code>429 Too Many Requests</code>. Wait a moment and retry — jobs typically finish within minutes.</p>
+
+      <div class="callout tip">
+        <span class="callout-icon">→</span>
+        <p><strong>Credit not charged for system errors.</strong> If a job fails due to an error on Kodah's side, the credit is automatically restored to your account.</p>
+      </div>
+    </div>
+
+    <!-- Submit Job -->
+    <div class="section" id="submit-job">
+      <h2>Submit a <em>Job</em></h2>
+
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method post">POST</span>
+          <span class="endpoint-path">/jobs</span>
+        </div>
+        <p class="endpoint-desc">Submit a new fix job. Returns immediately with a <code>job_id</code>. Processing happens asynchronously.</p>
+
+        <h3>Request body</h3>
+        <table class="param-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="param-name">repo_url</span><span class="required-badge">required</span></td>
+              <td><span class="param-type">string</span></td>
+              <td>Full HTTPS URL of the GitHub repository. Example: <code>https://github.com/owner/repo</code></td>
+            </tr>
+            <tr>
+              <td><span class="param-name">task</span><span class="required-badge">required</span></td>
+              <td><span class="param-type">string</span></td>
+              <td>Must be <code>"fix"</code>. This is the only supported task type.</td>
+            </tr>
+            <tr>
+              <td><span class="param-name">description</span><span class="required-badge">required</span></td>
+              <td><span class="param-type">string</span></td>
+              <td>A description of the bug or issue to fix. Include error messages, stack traces, or reproduction steps for best results.</td>
+            </tr>
+            <tr>
+              <td><span class="param-name">ref</span><span class="optional-badge">optional</span></td>
+              <td><span class="param-type">string</span></td>
+              <td>Branch name or commit hash to use. Defaults to <code>"main"</code>.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Response</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">json</span></div>
+          <div class="code-body"><pre><span class="c-key">{</span>
+  <span class="c-string">"job_id"</span>: <span class="c-string">"74fc9334-0d1a-48a7-9936-60b9dd84a24a"</span>
+<span class="c-key">}</span></pre></div>
+        </div>
+
+        <h3>Status codes</h3>
+        <table class="status-table">
+          <tr><td><span class="status-code ok">202</span></td><td class="status-desc">Job accepted. Processing has started.</td></tr>
+          <tr><td><span class="status-code err">401</span></td><td class="status-desc">Missing or invalid API key.</td></tr>
+          <tr><td><span class="status-code err">402</span></td><td class="status-desc">Insufficient credits.</td></tr>
+          <tr><td><span class="status-code err">429</span></td><td class="status-desc">Server at capacity. Retry after a few minutes.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Poll Status -->
+    <div class="section" id="poll-status">
+      <h2>Poll <em>Status</em></h2>
+
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method get">GET</span>
+          <span class="endpoint-path">/jobs/{job_id}/status</span>
+        </div>
+        <p class="endpoint-desc">Check the current status of a job. Does not consume credits.</p>
+
+        <h3>Response</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">json</span></div>
+          <div class="code-body"><pre><span class="c-key">{</span>
+  <span class="c-string">"job_id"</span>: <span class="c-string">"74fc9334-..."</span>,
+  <span class="c-string">"status"</span>: <span class="c-string">"completed"</span>,
+  <span class="c-string">"created_at"</span>: <span class="c-string">"2026-04-29T10:00:00Z"</span>,
+  <span class="c-string">"completed_at"</span>: <span class="c-string">"2026-04-29T10:02:27Z"</span>,
+  <span class="c-string">"elapsed_s"</span>: <span class="c-num">147.3</span>,
+  <span class="c-string">"error"</span>: <span class="c-key">null</span>
+<span class="c-key">}</span></pre></div>
+        </div>
+
+        <h3>Status values</h3>
+        <table class="status-table">
+          <tr><td><span class="status-pill running" style="display:inline-block;">running</span></td><td class="status-desc">Job is being processed. Continue polling.</td></tr>
+          <tr><td><span class="status-pill completed" style="display:inline-block;">completed</span></td><td class="status-desc">Job finished successfully. Retrieve the diff.</td></tr>
+          <tr><td><span class="status-pill failed" style="display:inline-block;">failed</span></td><td class="status-desc">Job failed. Check the <code>error</code> field for details.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Get Result -->
+    <div class="section" id="get-result">
+      <h2>Get <em>Result</em></h2>
+
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method get">GET</span>
+          <span class="endpoint-path">/jobs/{job_id}</span>
+        </div>
+        <p class="endpoint-desc">Retrieve the generated diff once the job is complete. Returns <code>425</code> if still running, <code>422</code> if failed.</p>
+
+        <h3>Response</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">json</span></div>
+          <div class="code-body"><pre><span class="c-key">{</span>
+  <span class="c-string">"job_id"</span>: <span class="c-string">"74fc9334-..."</span>,
+  <span class="c-string">"diff"</span>: <span class="c-string">"diff --git a/src/processor.py ..."</span>
+<span class="c-key">}</span></pre></div>
+        </div>
+
+        <p>The <code>diff</code> field contains a standard unified diff. Apply it with <code>git apply</code> or review it in any diff viewer.</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash — applying the patch</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <div class="code-body"><pre><span class="c-comment"># Save the diff to a file</span>
+<span class="c-method">curl</span> https://api.kodah.io/jobs/<span class="c-accent">JOB_ID</span> \
+  -H <span class="c-string">"X-API-Key: kdh_your_key"</span> \
+  | <span class="c-method">jq</span> -r <span class="c-string">'.diff'</span> > patch.diff
+
+<span class="c-comment"># Review it</span>
+<span class="c-method">cat</span> patch.diff
+
+<span class="c-comment"># Apply it</span>
+<span class="c-method">git apply</span> patch.diff</pre></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Account -->
+    <div class="section" id="account">
+      <h2>Account</h2>
+
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method get">GET</span>
+          <span class="endpoint-path">/me</span>
+        </div>
+        <p class="endpoint-desc">Returns account information including credit balance.</p>
+
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">json</span></div>
+          <div class="code-body"><pre><span class="c-key">{</span>
+  <span class="c-string">"email"</span>: <span class="c-string">"you@example.com"</span>,
+  <span class="c-string">"free_credits"</span>: <span class="c-num">8</span>,
+  <span class="c-string">"paid_balance"</span>: <span class="c-num">10.00</span>,
+  <span class="c-string">"fix_price_usd"</span>: <span class="c-num">0.50</span>
+<span class="c-key">}</span></pre></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Private Repos -->
+    <div class="section" id="private-repos">
+      <h2>Private <em>Repos</em></h2>
+      <p class="section-intro">Private repository access is granted automatically when you sign in with GitHub and authorize repository access. No tokens or additional configuration required.</p>
+
+      <p>When you create your account at <a href="https://kodah.io/register.html">kodah.io/register.html</a>, GitHub asks you to grant Kodah access to your repositories. Once granted, you can submit private repos the same way as public ones — just use the full HTTPS URL.</p>
+
+      <div class="callout info">
+        <span class="callout-icon">ℹ</span>
+        <p><strong>Private repos require paid credits.</strong> Free monthly fixes are valid for public repositories only. Submitting a private repo with no paid balance returns <code>402 Payment Required</code>.</p>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">bash — private repo example</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body"><pre><span class="c-method">curl</span> -X POST https://api.kodah.io/jobs \
+  -H <span class="c-string">"Content-Type: application/json"</span> \
+  -H <span class="c-string">"X-API-Key: kdh_your_key_here"</span> \
+  -d <span class="c-string">'{
+    "repo_url": "https://github.com/your-org/private-repo",
+    "task": "fix",
+    "description": "KeyError in config parser when config file is missing optional section",
+    "ref": "main"
+  }'</span></pre></div>
+      </div>
+    </div>
+
+    <!-- Polling pattern -->
+    <div class="section" id="polling">
+      <h2>Polling <em>Pattern</em></h2>
+      <p class="section-intro">Since jobs are asynchronous, you need to poll the status endpoint until the job finishes. Here is a recommended shell script for that.</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">bash — full polling script</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body"><pre><span class="c-comment">#!/bin/bash
+# Usage: ./fix.sh "https://github.com/owner/repo" "your bug description"</span>
+
+API_KEY=<span class="c-string">"kdh_your_key_here"</span>
+REPO_URL=<span class="c-string">"$1"</span>
+DESCRIPTION=<span class="c-string">"$2"</span>
+BASE=<span class="c-string">"https://api.kodah.io"</span>
+
+<span class="c-comment"># Submit job</span>
+JOB_ID=$(<span class="c-method">curl</span> -s -X POST <span class="c-string">"$BASE/jobs"</span> \
+  -H <span class="c-string">"Content-Type: application/json"</span> \
+  -H <span class="c-string">"X-API-Key: $API_KEY"</span> \
+  -d <span class="c-string">"{\"repo_url\": \"$REPO_URL\", \"task\": \"fix\", \"description\": \"$DESCRIPTION\"}"</span> \
+  | <span class="c-method">jq</span> -r <span class="c-string">'.job_id'</span>)
+
+<span class="c-method">echo</span> <span class="c-string">"Job submitted: $JOB_ID"</span>
+
+<span class="c-comment"># Poll until done</span>
+<span class="c-key">while</span> true; do
+  STATUS=$(<span class="c-method">curl</span> -s <span class="c-string">"$BASE/jobs/$JOB_ID/status"</span> \
+    -H <span class="c-string">"X-API-Key: $API_KEY"</span> \
+    | <span class="c-method">jq</span> -r <span class="c-string">'.status'</span>)
+
+  <span class="c-method">echo</span> <span class="c-string">"Status: $STATUS"</span>
+
+  <span class="c-key">if</span> [ <span class="c-string">"$STATUS"</span> = <span class="c-string">"completed"</span> ]; <span class="c-key">then</span>
+    <span class="c-comment"># Retrieve and apply diff</span>
+    <span class="c-method">curl</span> -s <span class="c-string">"$BASE/jobs/$JOB_ID"</span> \
+      -H <span class="c-string">"X-API-Key: $API_KEY"</span> \
+      | <span class="c-method">jq</span> -r <span class="c-string">'.diff'</span> > patch.diff
+    <span class="c-method">echo</span> <span class="c-string">"Patch saved to patch.diff"</span>
+    <span class="c-key">break</span>
+  <span class="c-key">elif</span> [ <span class="c-string">"$STATUS"</span> = <span class="c-string">"failed"</span> ]; <span class="c-key">then</span>
+    <span class="c-method">echo</span> <span class="c-string">"Job failed."</span>
+    <span class="c-key">break</span>
+  <span class="c-key">fi</span>
+
+  <span class="c-method">sleep</span> 15
+<span class="c-key">done</span></pre></div>
+      </div>
+    </div>
+
+    <!-- CI/CD -->
+    <div class="section" id="cicd">
+      <h2>CI/CD <em>Integration</em></h2>
+      <p class="section-intro">Kodah's API is designed to be embedded in automated pipelines. A common pattern is to trigger a fix job when a bug is detected in staging or when a test suite fails.</p>
+
+      <p>The following example shows a GitHub Actions workflow that calls Kodah when tests fail on a pull request.</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">yaml — .github/workflows/auto-fix.yml</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body"><pre><span class="c-key">name:</span> <span class="c-string">Auto Fix on Failure</span>
+
+<span class="c-key">on:</span>
+  <span class="c-key">workflow_run:</span>
+    <span class="c-key">workflows:</span> [<span class="c-string">"Test Suite"</span>]
+    <span class="c-key">types:</span> [<span class="c-string">completed</span>]
+
+<span class="c-key">jobs:</span>
+  <span class="c-key">fix:</span>
+    <span class="c-key">if:</span> <span class="c-string">${{ github.event.workflow_run.conclusion == 'failure' }}</span>
+    <span class="c-key">runs-on:</span> <span class="c-string">ubuntu-latest</span>
+    <span class="c-key">steps:</span>
+      - <span class="c-key">name:</span> <span class="c-string">Submit fix job</span>
+        <span class="c-key">run:</span> |
+          JOB_ID=$(curl -s -X POST https://api.kodah.io/jobs \
+            -H "Content-Type: application/json" \
+            -H "X-API-Key: ${{ secrets.KODAH_API_KEY }}" \
+            -d '{
+              "repo_url": "https://github.com/${{ github.repository }}",
+              "task": "fix",
+              "description": "Tests failed on branch ${{ github.ref_name }}. Please investigate and fix.",
+              "ref": "${{ github.ref_name }}"
+            }' | jq -r '.job_id')
+          echo "JOB_ID=$JOB_ID" >> $GITHUB_ENV
+
+      - <span class="c-key">name:</span> <span class="c-string">Wait for result</span>
+        <span class="c-key">run:</span> |
+          <span class="c-key">for</span> i in {1..20}; do
+            STATUS=$(curl -s "https://api.kodah.io/jobs/$JOB_ID/status" \
+              -H "X-API-Key: ${{ secrets.KODAH_API_KEY }}" \
+              | jq -r '.status')
+            [ "$STATUS" = "completed" ] && break
+            [ "$STATUS" = "failed" ] && exit 1
+            sleep 30
+          done
+          curl -s "https://api.kodah.io/jobs/$JOB_ID" \
+            -H "X-API-Key: ${{ secrets.KODAH_API_KEY }}" \
+            | jq -r '.diff' > patch.diff
+          cat patch.diff</pre></div>
+      </div>
+
+      <div class="callout tip">
+        <span class="callout-icon">→</span>
+        <p>Store your API key as a GitHub Actions secret named <code>KODAH_API_KEY</code>. Never hardcode it in your workflow files.</p>
+      </div>
+    </div>
+
+    <!-- Errors -->
+    <div class="section" id="errors">
+      <h2>Error <em>Reference</em></h2>
+      <p class="section-intro">All errors follow the same format: a JSON object with a <code>detail</code> field describing the issue.</p>
+
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">json</span></div>
+        <div class="code-body"><pre><span class="c-key">{</span> <span class="c-string">"detail"</span>: <span class="c-string">"Invalid API key"</span> <span class="c-key">}</span></pre></div>
+      </div>
+
+      <table class="param-table" style="margin-top: 20px;">
+        <thead><tr><th>Code</th><th>Meaning</th><th>Resolution</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="param-name">401</span></td>
+            <td>Missing or invalid API key</td>
+            <td>Check your <code>X-API-Key</code> header</td>
+          </tr>
+          <tr>
+            <td><span class="param-name">402</span></td>
+            <td>No credits remaining</td>
+            <td>Add credits at <a href="https://kodah.io/dashboard.html">kodah.io/dashboard.html</a></td>
+          </tr>
+          <tr>
+            <td><span class="param-name">402</span></td>
+            <td>Private repos require paid credits</td>
+            <td>Purchase credits or use a public repository</td>
+          </tr>
+          <tr>
+            <td><span class="param-name">404</span></td>
+            <td>Job not found</td>
+            <td>Check the <code>job_id</code></td>
+          </tr>
+          <tr>
+            <td><span class="param-name">422</span></td>
+            <td>Job failed</td>
+            <td>Check the <code>error</code> field in the status response</td>
+          </tr>
+          <tr>
+            <td><span class="param-name">425</span></td>
+            <td>Job still running</td>
+            <td>Continue polling the status endpoint</td>
+          </tr>
+          <tr>
+            <td><span class="param-name">429</span></td>
+            <td>Server at capacity</td>
+            <td>Wait a few minutes and retry</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">© 2026 Kodah</div>
+    <ul class="footer-links">
+      <li><a href="mailto:contact@kodah.io">Contact</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="docs.html">Docs</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  // Copy button
+  function copyCode(btn) {
+    const pre = btn.closest('.code-block').querySelector('pre');
+    const text = pre.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied ✓';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copy';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+
+  // Active sidebar link on scroll
+  const sections = document.querySelectorAll('.section[id]');
+  const links = document.querySelectorAll('.sidebar-nav a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.sidebar-nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
