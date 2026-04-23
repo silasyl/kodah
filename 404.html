@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kodah | 404 — Page Not Found</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1625; --bg-elevated: #241F33; --bg-card: #2D2640;
+  --border: #4A3F66; --border-subtle: #241F33;
+  --text: #FFFFFF; --text-secondary: #B1A9CA; --text-muted: #7D7491;
+  --accent: #FF7E67; --accent-glow: rgba(255, 126, 103, 0.15);
+  --accent-glow-strong: rgba(255, 126, 103, 0.3);
+  --green: #00E87B;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --sans: 'Outfit', -apple-system, sans-serif;
+}
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.65; -webkit-font-smoothing: antialiased; overflow: hidden; }
+::selection { background: var(--accent); color: var(--bg); }
+
+.grid-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 80px 80px; }
+.grain { position: fixed; inset: 0; z-index: 1; opacity: 0.3; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); }
+
+/* Nav */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 28px; backdrop-filter: blur(20px) saturate(1.4); background: rgba(8, 9, 12, 0.75); border-bottom: 1px solid var(--border-subtle); }
+nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.logo { font-family: var(--mono); font-weight: 600; color: var(--text); text-decoration: none; display: flex; align-items: center; }
+.nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+.nav-links a { font-size: 0.88rem; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta { font-family: var(--mono); font-size: 0.82rem !important; color: var(--accent) !important; border: 1px solid rgba(255, 126, 103, 0.3); padding: 7px 18px; border-radius: 6px; transition: all 0.25s !important; }
+.nav-cta:hover { background: var(--accent-glow); border-color: var(--accent); }
+
+/* Center layout */
+.center { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 2; }
+
+/* Glow behind the 404 */
+.glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%); pointer-events: none; animation: breathe 4s ease-in-out infinite; }
+@keyframes breathe { 0%, 100% { opacity: 0.6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
+
+.content { text-align: center; position: relative; z-index: 3; padding: 0 28px; animation: fadeInUp 0.7s ease both; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Big 404 */
+.four-o-four { font-family: var(--mono); font-size: clamp(6rem, 18vw, 12rem); font-weight: 600; letter-spacing: -0.06em; line-height: 1; color: transparent; background: linear-gradient(135deg, var(--accent) 0%, rgba(255,126,103,0.3) 100%); -webkit-background-clip: text; background-clip: text; margin-bottom: 8px; animation: fadeInUp 0.7s ease 0.05s both; }
+
+.badge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted); background: var(--bg-card); border: 1px solid var(--border); padding: 5px 14px; border-radius: 100px; margin-bottom: 28px; letter-spacing: 0.03em; animation: fadeInUp 0.7s ease 0.1s both; }
+
+h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem); letter-spacing: -0.02em; margin-bottom: 14px; animation: fadeInUp 0.7s ease 0.15s both; }
+h1 em { font-style: italic; color: var(--accent); }
+
+p { color: var(--text-secondary); font-size: 1rem; max-width: 420px; margin: 0 auto 36px; line-height: 1.7; animation: fadeInUp 0.7s ease 0.2s both; }
+
+.actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; animation: fadeInUp 0.7s ease 0.25s both; }
+.btn-primary { font-family: var(--mono); font-size: 0.88rem; font-weight: 500; color: var(--bg); background: var(--accent); border: none; padding: 12px 28px; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.25s; }
+.btn-primary:hover { background: #ff9b88; box-shadow: 0 0 30px var(--accent-glow-strong); transform: translateY(-1px); }
+.btn-secondary { font-family: var(--mono); font-size: 0.88rem; color: var(--text-secondary); background: transparent; border: 1px solid var(--border); padding: 12px 28px; border-radius: 8px; text-decoration: none; transition: all 0.25s; }
+.btn-secondary:hover { color: var(--text); border-color: var(--text-muted); background: var(--bg-elevated); transform: translateY(-1px); }
+
+/* Canvas for particles */
+canvas { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .actions { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="grain"></div>
+<canvas id="c"></canvas>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <img src="small_logo.png" alt="Kodah" style="width:114px; height:40px; mix-blend-mode:screen; border-radius:6px;">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#results">Results</a></li>
+      <li><a href="/#benchmark">Benchmark</a></li>
+      <li><a href="/#pricing">Pricing</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="register.html" class="nav-cta">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="center">
+  <div class="glow"></div>
+  <div class="content">
+    <div class="four-o-four">404</div>
+    <div class="badge">page not found</div>
+    <h1>This page doesn't <em>exist.</em></h1>
+    <p>The URL you followed might be broken, moved, or it never existed in the first place.</p>
+    <div class="actions">
+      <a href="/" class="btn-primary">Go home →</a>
+      <a href="dashboard.html" class="btn-secondary">Dashboard</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const canvas = document.getElementById('c');
+  const ctx    = canvas.getContext('2d');
+  let W, H;
+
+  const mouse  = { x: -9999, y: -9999 };
+  const smooth = { x: 0, y: 0 };
+
+  const COUNT      = 70;
+  const M_ATTRACT  = 160;
+  const M_REPEL    = 36;
+  const PULL_STR   = 0.045;
+  const REPEL_STR  = 0.32;
+  const ORBIT_STR  = 0.016;
+  const DAMPING    = 0.968;
+  const MAX_SPEED  = 2.4;
+  const WANDER_STR = 0.01;
+
+  const PALETTES = [
+    { r: 255, g: 126, b: 103, baseOp: 0.5,  nearOp: 0.85 },
+    { r: 200, g: 190, b: 255, baseOp: 0.25, nearOp: 0.55 },
+    { r: 200, g: 190, b: 255, baseOp: 0.18, nearOp: 0.45 },
+  ];
+
+  function rand(a, b) { return Math.random() * (b - a) + a; }
+  function pick(arr)  { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    smooth.x = W / 2;
+    smooth.y = H / 2;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function makeDot() {
+    return {
+      x: rand(0, W), y: rand(0, H),
+      vx: rand(-0.3, 0.3), vy: rand(-0.3, 0.3),
+      r: rand(1.4, 2.8),
+      pal: pick(PALETTES),
+      wx: rand(0, Math.PI * 2), wy: rand(0, Math.PI * 2),
+      ws: rand(0.004, 0.011),
+    };
+  }
+
+  const dots = Array.from({ length: COUNT }, makeDot);
+
+  document.addEventListener('mousemove', e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    smooth.x += (mouse.x - smooth.x) * 0.08;
+    smooth.y += (mouse.y - smooth.y) * 0.08;
+
+    dots.forEach(d => {
+      const dx = smooth.x - d.x, dy = smooth.y - d.y;
+      const dist = Math.hypot(dx, dy) || 1;
+
+      if (dist < M_REPEL) {
+        d.vx -= (dx / dist) * REPEL_STR;
+        d.vy -= (dy / dist) * REPEL_STR;
+      } else if (dist < M_ATTRACT) {
+        const t = 1 - dist / M_ATTRACT;
+        d.vx += (dx / dist) * PULL_STR * t;
+        d.vy += (dy / dist) * PULL_STR * t;
+        d.vx += (-dy / dist) * ORBIT_STR * t;
+        d.vy += ( dx / dist) * ORBIT_STR * t;
+      }
+
+      d.wx += d.ws; d.wy += d.ws * 0.7;
+      const far = Math.max(0, dist - M_ATTRACT) / 300;
+      d.vx += Math.cos(d.wx) * WANDER_STR * far;
+      d.vy += Math.sin(d.wy) * WANDER_STR * far;
+
+      d.vx *= DAMPING; d.vy *= DAMPING;
+      const sp = Math.hypot(d.vx, d.vy);
+      if (sp > MAX_SPEED) { d.vx = d.vx / sp * MAX_SPEED; d.vy = d.vy / sp * MAX_SPEED; }
+
+      d.x += d.vx; d.y += d.vy;
+      if (d.x < -10) d.x = W + 10;
+      if (d.x > W + 10) d.x = -10;
+      if (d.y < -10) d.y = H + 10;
+      if (d.y > H + 10) d.y = -10;
+
+      const prox   = Math.max(0, 1 - dist / M_ATTRACT);
+      const op     = d.pal.baseOp + (d.pal.nearOp - d.pal.baseOp) * prox;
+      const radius = d.r + prox * 1.4;
+      const { r: cr, g: cg, b: cb } = d.pal;
+
+      if (prox > 0.15) {
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, radius * 3.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${cr},${cg},${cb},${prox * 0.07})`;
+        ctx.fill();
+      }
+
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${cr},${cg},${cb},${op})`;
+      ctx.fill();
+    });
+
+    requestAnimationFrame(loop);
+  }
+
+  loop();
+})();
+</script>
+</body>
+</html>
