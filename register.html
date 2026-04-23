@@ -128,6 +128,20 @@ footer .footer-inner { max-width: 1180px; margin: 0 auto; display: flex; justify
       <p>10 free fixes every month. Connect your GitHub account and get your API key in seconds.</p>
     </div>
 
+    <div id="waitlist-msg" style="display: none; background: rgba(255, 126, 103, 0.1); border: 1px solid var(--accent); color: var(--text); padding: 20px; border-radius: 12px; margin-bottom: 30px; font-size: 0.95rem;">
+        <h3 style="color: var(--accent); margin-bottom: 8px; font-family: var(--serif);">You're on the list! 🚀</h3>
+        <p>Kodah is currently in early access due to the benchmark traffic. We've reserved your spot and will email you as soon as your API key is ready (slated for next week).</p>
+    </div>
+
+    <script>
+        // Checa se voltou do callback com status de waitlist
+        if (new URLSearchParams(window.location.search).get('status') === 'waitlisted') {
+            document.getElementById('waitlist-msg').style.display = 'block';
+            // Esconde a badge de "Free account" original para não confundir
+            document.querySelector('.card-badge').style.display = 'none';
+        }
+    </script>
+
     <div class="register-form">
       <a class="btn-github" href="#" onclick="loginWithGithub(); return false;">
         <svg class="github-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

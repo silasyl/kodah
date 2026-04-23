@@ -148,6 +148,14 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); min-
         return;
       }
 
+      // --- LOGICA DE WAITLIST ADICIONADA AQUI ---
+      if (data.waitlisted) {
+        // Redireciona de volta para o registro com a flag na URL
+        window.location.href = "/register.html?status=waitlisted";
+        return;
+      }
+      // ------------------------------------------
+
       // Success
       generatedKey = data.api_key;
       localStorage.setItem('kodah_api_key', data.api_key);
