@@ -83,8 +83,8 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
 .credit-pkg:hover { border-color: rgba(255,126,103,0.3); background: var(--bg-card-hover); transform: translateY(-2px); }
 .credit-pkg-price { font-family: var(--mono); font-size: 1.6rem; font-weight: 600; color: var(--text); letter-spacing: -0.03em; margin-bottom: 4px; }
 .credit-pkg-desc { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px; }
-.credit-pkg-btn { width: 100%; font-family: var(--mono); font-size: 0.82rem; color: var(--accent); background: var(--accent-glow); border: 1px solid rgba(255,126,103,0.2); padding: 10px; border-radius: 6px; cursor: pointer; transition: all 0.25s; }
-.credit-pkg-btn:hover { background: rgba(255,126,103,0.25); border-color: var(--accent); }
+.credit-pkg-btn { width: 100%; font-family: var(--mono); font-size: 0.82rem; color: var(--bg); background: var(--accent); border: none; padding: 10px; border-radius: 6px; cursor: pointer; transition: all 0.25s; }
+.credit-pkg-btn:hover { background: #ff9b88; box-shadow: 0 0 20px var(--accent-glow-strong); }
 .credit-pkg-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* API Key section */
@@ -183,9 +183,10 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
           <div class="credit-pkg-desc">10 fixes · $0.50 each</div>
           <button class="credit-pkg-btn" onclick="addCredits('price_1TOmKRH7MUoJuXU1c4WOmwNf', this)">Add $5.00 →</button>
         </div>
-        <div class="credit-pkg">
+        <div class="credit-pkg" style="border-color: rgba(255,126,103,0.4); position: relative;">
+          <div style="position: absolute; top: -11px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; background: var(--accent); color: var(--bg); padding: 3px 14px; border-radius: 100px; font-weight: 600; white-space: nowrap;">BEST VALUE</div>
           <div class="credit-pkg-price">$10.00</div>
-          <div class="credit-pkg-desc">20 fixes · $0.50 each</div>
+          <div class="credit-pkg-desc">22 fixes · <span style="color: var(--green);">+2 bonus fixes</span></div>
           <button class="credit-pkg-btn" onclick="addCredits('price_1TOmM7H7MUoJuXU1xVDLvcpl', this)">Add $10.00 →</button>
         </div>
       </div>
