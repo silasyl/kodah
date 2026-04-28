@@ -160,6 +160,7 @@ footer .footer-inner { max-width: 760px; margin: 0 auto; display: flex; justify-
     <p><strong>Free tier:</strong> Every account receives 10 free fixes per calendar month, valid for public repositories only. Free fixes reset on the first day of each calendar month and do not carry over.</p>
     <p><strong>Paid credits:</strong> Additional fixes are available by purchasing credit packages. Credits are denominated in USD and deducted at a flat rate of <strong>$0.50 per fix</strong>. Paid credits never expire and are valid for both public and private repositories.</p>
     <p><strong>Billing:</strong> Payments are processed securely by Stripe. Kodah does not store your payment card information. Credits are non-refundable once consumed. If a job fails due to a system error on our side, the credit used for that job will be restored to your account.</p>
+    <p><strong>Job execution:</strong> Credits are charged per job submitted, regardless of whether a patch was produced. A job is billed upon execution, not upon success. If the agent cannot determine a fix for the provided issue, the job will complete with an empty diff and credits will still be consumed.</p>
     <p><strong>Pricing changes:</strong> We reserve the right to change pricing at any time. Changes will be communicated via email and will apply to future purchases only — credits already purchased are unaffected.</p>
   </div>
 
