@@ -676,6 +676,11 @@ JOB_ID=$(<span class="c-method">curl</span> -s -X POST <span class="c-string">"$
           </tr>
           <tr>
             <td><span class="param-name">404</span></td>
+            <td>Repository not found</td>
+            <td>Check the repo URL and make sure it is accessible</td>
+          </tr>
+          <tr>
+            <td><span class="param-name">404</span></td>
             <td>Job not found</td>
             <td>Check the <code>job_id</code></td>
           </tr>
@@ -688,6 +693,11 @@ JOB_ID=$(<span class="c-method">curl</span> -s -X POST <span class="c-string">"$
             <td><span class="param-name">425</span></td>
             <td>Job still running</td>
             <td>Continue polling the status endpoint</td>
+          </tr>
+          <tr>
+            <td><span class="param-name">429</span></td>
+            <td>Job already in progress</td>
+            <td>Wait for your current job to finish before submitting another</td>
           </tr>
           <tr>
             <td><span class="param-name">429</span></td>
