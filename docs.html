@@ -616,12 +616,12 @@ JOB_ID=$(<span class="c-method">curl</span> -s -X POST <span class="c-string">"$
           JOB_ID=$(curl -s -X POST https://api.kodah.io/jobs \
             -H "Content-Type: application/json" \
             -H "X-API-Key: ${{ secrets.KODAH_API_KEY }}" \
-            -d '{
-              "repo_url": "https://github.com/${{ github.repository }}",
-              "task": "fix",
-              "description": "Tests failed on branch ${{ github.ref_name }}. Please investigate and fix.",
-              "ref": "${{ github.ref_name }}"
-            }' | jq -r '.job_id')
+            -d "{
+              \"repo_url\": \"https://github.com/${{ github.repository }}\",
+              \"task\": \"fix\",
+              \"description\": \"Tests failed on branch ${{ github.ref_name }}. Please investigate and fix.\",
+              \"ref\": \"${{ github.ref_name }}\"
+            }" | jq -r '.job_id')
           echo "JOB_ID=$JOB_ID" >> $GITHUB_ENV
 
       - <span class="c-key">name:</span> <span class="c-string">Wait for result</span>
