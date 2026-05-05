@@ -151,6 +151,22 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
 .time-tag { font-family: var(--mono); font-size: 0.68rem; padding: 2px 7px; border-radius: 4px; background: rgba(0,232,123,0.1); color: #00E87B; border: 1px solid rgba(0,232,123,0.2); }
 .benchmark-note { text-align: center; margin-top: 24px; font-size: 0.82rem; color: var(--text-muted); font-style: italic; line-height: 1.7; }
 
+/* Validated benchmarks section */
+.benchmarks-validated { background: var(--bg-elevated); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.benchmarks-validated h2 { font-family: var(--serif); font-size: 2.8rem; text-align: center; letter-spacing: -0.02em; margin-bottom: 12px; }
+.benchmarks-validated h2 em { font-style: italic; color: var(--accent); }
+.benchmarks-validated-sub { text-align: center; color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 64px; max-width: 620px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+.benchmarks-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 860px; margin: 0 auto; }
+.benchmark-val-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 40px 36px; transition: all 0.3s; }
+.benchmark-val-card:hover { border-color: rgba(255,126,103,0.2); background: var(--bg-card-hover); transform: translateY(-3px); }
+.benchmark-val-org { font-family: var(--mono); font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+.benchmark-val-title { font-family: var(--serif); font-size: 1.5rem; letter-spacing: -0.02em; margin-bottom: 24px; line-height: 1.2; }
+.benchmark-val-result { font-family: var(--mono); font-size: 2.4rem; font-weight: 600; color: var(--accent); letter-spacing: -0.04em; margin-bottom: 4px; }
+.benchmark-val-result-label { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 28px; }
+.benchmark-val-details { display: flex; flex-direction: column; gap: 10px; }
+.benchmark-val-detail { font-size: 0.88rem; color: var(--text-secondary); display: flex; gap: 10px; line-height: 1.5; }
+.benchmark-val-detail::before { content: '→'; color: var(--accent); font-family: var(--mono); font-size: 0.82rem; flex-shrink: 0; margin-top: 1px; }
+
 .pricing-section h2 { font-family: var(--serif); font-size: 2.8rem; text-align: center; letter-spacing: -0.02em; margin-bottom: 12px; }
 .pricing-section h2 em { font-style: italic; color: var(--accent); }
 .pricing-sub { text-align: center; color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 64px; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.7; }
@@ -191,10 +207,12 @@ body.js-ready .reveal { opacity: 0; transform: translateY(24px); }
 body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
 @media (max-width: 900px) {
   .stats-bar .container { grid-template-columns: repeat(2, 1fr); }
-  .stat-item:nth-child(2)::after { display: none; }
+  .stat-item:nth-child(2)::after,
+  .stat-item:nth-child(4)::after { display: none; }
   .code-section .container, .claim-grid { grid-template-columns: 1fr; gap: 40px; }
   .moat-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
   .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .benchmarks-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
   .time-row { grid-template-columns: 100px 1fr 60px; gap: 12px; }
   .time-row-label { font-size: 0.8rem; }
   .nav-links { display: none; }
@@ -328,7 +346,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
     <div class="moat-grid">
       <div class="moat-card reveal"><div class="moat-icon">🧠</div><h3>Context, Not Brute Force</h3><p>Instead of dumping raw files into a prompt, Kodah builds a precise structural understanding of your codebase. Better input beats a bigger model.</p></div>
       <div class="moat-card reveal"><div class="moat-icon">🎯</div><h3>First-Attempt Accuracy</h3><p>Valid, reviewable patches on the first attempt, 93% of the time. No babysitting required.</p></div>
-      <div class="moat-card reveal"><div class="moat-icon">🔧</div><h3>Zero Configuration</h3><p>No fine-tuning. No training on your codebase. Kodah works on repositories it has never seen before: public or private, out of the box.</p></div>
+      <div class="moat-card reveal"><div class="moat-icon">✅</div><h3>Multi-Benchmark Validated</h3><p>Independently evaluated on SWE-bench Lite and SWE-PolyBench Verified: across 17 production Python repositories including scikit-learn, transformers and langchain.</p></div>
       <div class="moat-card reveal"><div class="moat-icon">🔒</div><h3>Your Code Stays Yours</h3><p>Source code is processed in an isolated environment and never stored. Analysis artifacts are automatically discarded after the session.</p></div>
       <div class="moat-card reveal"><div class="moat-icon">⚡</div><h3>CI/CD Native</h3><p>Pure HTTP API. Plug Kodah into your GitHub Actions, GitLab pipelines, or any webhook workflow. No plugins, no IDE dependencies.</p></div>
       <div class="moat-card reveal"><div class="moat-icon">💳</div><h3>Pay Per Fix</h3><p>$0.50 per resolved issue. No monthly commitment, no seat licensing. Your team fixes 2 bugs or 2,000: you pay exactly for what you use.</p></div>
@@ -368,7 +386,36 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
         </tbody>
       </table>
     </div>
-    <p class="benchmark-note reveal">Resolve rates from public benchmarks and official leaderboards.<br>Kodah evaluated against the official SWE-bench Lite test harness (300 issues): 81% of the resolve rate of the current leader.<br>Dev time estimates reflect total developer effort per bug including investigation, iteration, and review.</p>
+    <p class="benchmark-note reveal">Resolve rates from public benchmarks and official leaderboards.<br>Kodah evaluated on SWE-bench Lite (300 issues, 81% of the current leader) and SWE-PolyBench Verified (113 issues, 4th globally in Python).<br>Dev time estimates reflect total developer effort per bug including investigation, iteration, and review.</p>
+  </div>
+</section>
+
+<section class="benchmarks-validated">
+  <div class="container">
+    <h2 class="reveal">Validated across <em>multiple independent benchmarks.</em></h2>
+    <p class="benchmarks-validated-sub reveal">Multiple benchmarks. The same results.</p>
+    <div class="benchmarks-grid">
+      <div class="benchmark-val-card reveal">
+        <div class="benchmark-val-org">Princeton NLP · OpenAI</div>
+        <div class="benchmark-val-title">SWE-bench Lite</div>
+        <div class="benchmark-val-result">51%</div>
+        <div class="benchmark-val-result-label">Resolve rate · 300 issues</div>
+        <div class="benchmark-val-details">
+          <div class="benchmark-val-detail">81% of the resolve rate of the current leader</div>
+          <div class="benchmark-val-detail">djando/django, scikit-learn/scikit-learn, psf/requests and 9 more</div>
+        </div>
+      </div>
+      <div class="benchmark-val-card reveal">
+        <div class="benchmark-val-org">Amazon Science</div>
+        <div class="benchmark-val-title">SWE-PolyBench Verified</div>
+        <div class="benchmark-val-result">#4</div>
+        <div class="benchmark-val-result-label">Global Python ranking · 113 issues</div>
+        <div class="benchmark-val-details">
+          <div class="benchmark-val-detail">32.74% resolve rate across 5 production repositories</div>
+          <div class="benchmark-val-detail">huggingface/transformers, keras-team/keras, langchain-ai/langchain and more</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
