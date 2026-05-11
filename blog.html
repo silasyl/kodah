@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | Kodah</title>
+<meta name="description" content="Case studies, technical deep-dives, and updates from the Kodah team.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1625; --bg-elevated: #241F33; --bg-card: #2D2640;
+  --border: #4A3F66; --border-subtle: #2D2640;
+  --text: #FFFFFF; --text-secondary: #B1A9CA; --text-muted: #7D7491;
+  --accent: #FF7E67; --accent-glow: rgba(255,126,103,0.12);
+  --green: #00E87B;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --sans: 'Outfit', -apple-system, sans-serif;
+}
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 400; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+::selection { background: var(--accent); color: var(--bg); }
+body::before { content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px); background-size: 80px 80px; }
+
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 28px; backdrop-filter: blur(20px) saturate(1.4); background: rgba(8,9,12,0.78); border-bottom: 1px solid var(--border-subtle); }
+.nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+.nav-links a { font-size: 0.88rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--text); }
+.nav-cta { font-family: var(--mono); font-size: 0.82rem !important; color: var(--accent) !important; border: 1px solid rgba(255,126,103,0.3); padding: 7px 18px; border-radius: 6px; transition: all 0.2s !important; }
+.nav-cta:hover { background: var(--accent-glow) !important; }
+
+.page { position: relative; z-index: 1; }
+
+.blog-header { padding: 140px 28px 56px; max-width: 760px; margin: 0 auto; }
+.blog-header h1 { font-family: var(--serif); font-size: 2.6rem; letter-spacing: -0.025em; color: var(--text); margin-bottom: 10px; }
+.blog-header p { font-size: 1rem; color: var(--text-muted); }
+
+.blog-list { max-width: 760px; margin: 0 auto; padding: 0 28px 120px; }
+
+.post-item { border-top: 1px solid var(--border-subtle); padding: 36px 0; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start; text-decoration: none; transition: opacity 0.2s; }
+.post-item:hover { opacity: 0.8; }
+.post-item:last-child { border-bottom: 1px solid var(--border-subtle); }
+
+.post-item-tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; display: block; }
+.post-item-title { font-family: var(--serif); font-size: 1.45rem; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 10px; }
+.post-item-title em { font-style: italic; color: var(--accent); }
+.post-item-desc { font-size: 0.93rem; color: var(--text-muted); line-height: 1.65; max-width: 520px; }
+
+.post-item-meta { text-align: right; flex-shrink: 0; }
+.post-item-date { font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 6px; }
+.post-item-read { font-family: var(--mono); font-size: 0.72rem; color: var(--border); display: block; }
+
+footer { border-top: 1px solid var(--border-subtle); padding: 44px 0; position: relative; z-index: 1; }
+footer .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; display: flex; justify-content: space-between; align-items: center; }
+.footer-left { font-family: var(--mono); font-size: 0.8rem; color: var(--text-muted); }
+.footer-links { display: flex; gap: 28px; list-style: none; }
+.footer-links a { font-size: 0.82rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text-secondary); }
+
+.fade { opacity: 0; transform: translateY(14px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.fade.in { opacity: 1; transform: none; }
+
+@media (max-width: 600px) {
+  .post-item { grid-template-columns: 1fr; gap: 12px; }
+  .post-item-meta { text-align: left; }
+  .nav-links { display: none; }
+  footer .container { flex-direction: column; gap: 18px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html">
+      <img src="small_logo.png" alt="Kodah" style="width:114px;height:40px;mix-blend-mode:screen;border-radius:6px;display:block;">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#results">Results</a></li>
+      <li><a href="index.html#benchmark">Benchmark</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="docs.html">Docs</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="register.html" class="nav-cta">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="blog-header fade">
+    <h1>Blog</h1>
+    <p>Case studies, technical deep-dives, and updates from the Kodah team.</p>
+  </div>
+
+  <div class="blog-list">
+    <a href="blog_2026_05_11.html" class="post-item fade">
+      <div>
+        <span class="post-item-tag">Case Study</span>
+        <div class="post-item-title">Firefox showed what AI can find.<br>The <em>fixing gap</em> is real.</div>
+        <p class="post-item-desc">Mozilla used Claude Mythos Preview to find 271 bugs in Firefox. We ran Kodah on two of them: real open bugs, public repo. One had been open for three months.</p>
+      </div>
+      <div class="post-item-meta">
+        <span class="post-item-date">May 11, 2026</span>
+        <span class="post-item-read">6 min</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-left">© 2026 Kodah</div>
+    <ul class="footer-links">
+      <li><a href="mailto:contact@kodah.io">Contact</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="docs.html">Docs</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(
+  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+  { threshold: 0.06 }
+);
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
