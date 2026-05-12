@@ -164,12 +164,16 @@ footer .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; display:
   </div>
 </div>
 
+<div id="lightbox" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.92);cursor:zoom-out;align-items:center;justify-content:center;" onclick="this.style.display='none'">
+  <img id="lightbox-img" src="" style="max-width:92vw;max-height:92vh;border-radius:8px;object-fit:contain;">
+</div>
+
 <div class="post-wrap post-body">
 
   <p class="fade">Mozilla <a href="https://hacks.mozilla.org/2026/05/behind-the-scenes-hardening-firefox/" target="_blank" rel="noopener">published on May 7</a> how they used Claude Mythos Preview, a pre-release model, to find 271 bugs across the Firefox codebase. The chart below tells the story better than any headline.</p>
 
   <figure class="post-figure fade">
-    <img src="firefox-bugs-chart.webp" alt="Firefox Security Bug Fixes by Month — April 2026 shows 423 fixes, a dramatic spike from the roughly 20 monthly baseline in 2025." style="border-radius:10px;border:1px solid #2D2640;">
+    <img src="firefox-bugs-chart.webp" alt="Firefox Security Bug Fixes by Month." style="border-radius:10px;border:1px solid #2D2640; cursor:zoom-in;" onclick="document.getElementById('lightbox-img').src=this.src;document.getElementById('lightbox').style.display='flex'">
     <figcaption>Firefox security bug fixes by month. January 2025 through March 2026 averaged roughly 20–30 fixes/month. April 2026: 423, driven by the Claude Mythos bug-finding effort. <a href="https://hacks.mozilla.org/2026/05/behind-the-scenes-hardening-firefox/" target="_blank" rel="noopener">Source: Mozilla, May 7, 2026</a>.</figcaption>
   </figure>
 
@@ -185,7 +189,7 @@ footer .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; display:
   <p class="fade">Before showing what fixing looks like, it helps to understand where AI autonomy actually stands today. <a href="https://metr.org" target="_blank" rel="noopener">METR</a>, an AI safety research organization, independently benchmarks how long AI agents can operate on complex, real software tasks before needing human input.</p>
 
   <figure class="post-figure fade">
-    <img src="METR_graphic.png" alt="METR chart: Time horizon of software tasks different LLMs can complete 50% of the time. Claude Mythos Preview reaches past the 16-hour measurement ceiling.">
+    <img src="METR_graphic.png" alt="METR Time Horizon Benchmark" style="border-radius:10px;border:1px solid #2D2640;cursor:zoom-in;" onclick="document.getElementById('lightbox-img').src=this.src;document.getElementById('lightbox').style.display='flex'">
     <figcaption>METR's time-horizon benchmark tracks how long an AI can sustain useful autonomous work on software tasks. GPT-2 managed seconds. GPT-4 reached roughly 6 minutes. Claude Mythos Preview exceeds the 16-hour ceiling: beyond what METR's current task suite can even measure. <a href="https://metr.org/time-horizons/" target="_blank" rel="noopener">Source: METR, last updated May 8, 2026</a>.</figcaption>
   </figure>
 
