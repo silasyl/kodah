@@ -145,7 +145,7 @@ footer .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; display:
       <span class="post-read">5 min read</span>
     </div>
     <h1>The library that couldn't<br>read its own <em>output.</em></h1>
-    <p class="post-hero-sub">SymPy generated domain strings it refused to parse back. The bug sat open for 2,094 days. Kodah closed it in 351 seconds.</p>
+    <p class="post-hero-sub">SymPy generated domain strings it refused to parse back. The bug sat open for 2,094 days. Kodah closed it in 351 seconds, it even covered edge cases nobody reported.</p>
   </div>
 </div>
 
@@ -167,17 +167,17 @@ footer .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; display:
 
   <p class="fade">SymPy is one of the most widely used mathematical computing libraries in the Python ecosystem. In late 2013, its maintainer filed <a href="https://github.com/sympy/sympy/issues/2709" target="_blank" rel="noopener">a bug</a> with a single, clear symptom: the library was producing output it refused to accept as input.</p>
 
-  <p class="fade">Ask SymPy to infer the structure of an expression and it would return a domain string. Hand that exact string back in the very next call and it would crash with an error, claiming the value was invalid. The system was generating notation it couldn't parse — a contradiction hiding in plain sight inside one of the most downloaded scientific packages in Python.</p>
+  <p class="fade">Ask SymPy to infer the structure of an expression and it would return a domain string. Hand that exact string back in the very next call and it would crash with an error, claiming the value was invalid. The system was generating notation it couldn't parse: a contradiction hiding in plain sight inside one of the most downloaded scientific packages in Python.</p>
 
   <div class="pullquote fade">
-    <p>The system was generating notation it couldn't parse — a contradiction hiding in plain sight.</p>
+    <p>The system was generating notation it couldn't parse: a contradiction hiding in plain sight.</p>
   </div>
 
-  <p class="fade">The issue sat open, labeled and acknowledged, for years. It was re-reported in 2018 by a different user who hit the same wall, restarting the clock — 561 days this time before the fix was finally merged. The merge was made by the same person who had filed the original report back in 2013.</p>
+  <p class="fade">The issue sat open, labeled and acknowledged, for years. It was re-reported in 2018 by a different user who hit the same wall, restarting the clock: 561 days this time before the fix was finally merged. The merge was made by the same person who had filed the original report back in 2013.</p>
 
   <h2 class="fade">What Kodah did</h2>
 
-  <p class="fade">Kodah located the gap in the domain parser: it recognized real and complex fields as standalone values, but had no logic for when those same fields appeared as the base of a polynomial ring. The input fell through every check and hit the error handler — not because it was malformed, but because that case had simply never been implemented.</p>
+  <p class="fade">Kodah located the gap in the domain parser: it recognized real and complex fields as standalone values, but had no logic for when those same fields appeared as the base of a polynomial ring. The input fell through every check and hit the error handler: not because it was malformed, but because that case had simply never been implemented.</p>
 
   <p class="fade">Before generating the patch, Kodah mapped the full family of affected cases: the short aliases, the precision-suffixed variants, and their complex field equivalents. A fix scoped only to the reported input would have left those variants silently broken.</p>
 
@@ -236,7 +236,7 @@ footer .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; display:
 
   <h2 class="fade">How they compare</h2>
 
-  <p class="fade">Both patches fix the reported bug. The human patch touches the minimum amount of code to close the issue as filed. Kodah, however, went further: beyond fixing the original case, it independently identified and handled precision-qualified variants like <code style="font-family:var(--mono);font-size:0.88em;color:var(--accent)">RR_53[x]</code> and <code style="font-family:var(--mono);font-size:0.88em;color:var(--accent)">CC_80[x]</code> — edge cases that were never reported, already covered.</p>
+  <p class="fade">Both patches fix the reported bug. The human patch touches the minimum amount of code to close the issue as filed. Kodah, however, went further: beyond fixing the original case, it independently identified and handled precision-qualified variants like <code style="font-family:var(--mono);font-size:0.88em;color:var(--accent)">RR_53[x]</code> and <code style="font-family:var(--mono);font-size:0.88em;color:var(--accent)">CC_80[x]</code>, edge cases that were never reported, already covered.</p>
 
   <table class="compare-table fade">
     <thead>
