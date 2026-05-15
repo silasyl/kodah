@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The library that couldn't read its own output. | Kodah</title>
-<meta name="description" content="SymPy generated domain strings it refused to parse. The bug sat open for 2,094 days. Kodah closed it in 351 seconds.">
+<title>Django should not be leaking your secrets. | Kodah</title>
+<meta name="description" content="Django is one of the most widely used web frameworks in Python. Exposing user secrets is a serious vulnerability for a framework of this scale. Kodah closed it in 78 seconds.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -15,6 +15,7 @@
   --text: #FFFFFF; --text-secondary: #B1A9CA; --text-muted: #7D7491;
   --accent: #FF7E67; --accent-glow: rgba(255,126,103,0.12);
   --green: #00E87B;
+  --red: #FF5F57; --red-glow: rgba(255,95,87,0.10);
   --serif: 'DM Serif Display', Georgia, serif;
   --mono: 'JetBrains Mono', 'Fira Code', monospace;
   --sans: 'Outfit', -apple-system, sans-serif;
@@ -56,11 +57,14 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 28px;
 .post-body h2 em { font-style: italic; color: var(--accent); }
 .post-body h3 { font-family: var(--sans); font-size: 0.78rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin: 48px 0 14px; }
 
-/* METADATA TABLE */
+/* META TABLE */
 .meta-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 36px 0; border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; }
 .meta-table td { padding: 11px 16px; border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); font-family: var(--mono); font-size: 0.8rem; }
-.meta-table td:first-child { color: var(--text-muted); font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; width: 46%; background: var(--bg-elevated); }
+.meta-table td:first-child { color: var(--text-muted); font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; width: 36%; background: var(--bg-elevated); }
 .meta-table tr:last-child td { border-bottom: none; }
+.meta-table .severity-row td { background: var(--red-glow); }
+.meta-table .severity-row td:first-child { background: rgba(255,95,87,0.08); color: var(--red); }
+.meta-table .severity-row td:last-child { color: var(--red); }
 
 /* PULLQUOTE */
 .pullquote { border-left: 2px solid var(--accent); padding: 4px 0 4px 24px; margin: 40px 0; }
@@ -77,7 +81,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 28px;
 .diff-rem { color: #ff8a82; background: rgba(255,138,130,0.06); display: block; white-space: pre; }
 .diff-ctx { color: var(--text-muted); display: block; white-space: pre; }
 .diff-hunk { color: #82aaff; display: block; white-space: pre; margin-bottom: 2px; }
-.diff-comment { color: #7D7491; display: block; white-space: pre; }
 
 /* INLINE METRICS */
 .inline-metrics { display: flex; gap: 0; border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; margin: 36px 0; }
@@ -85,6 +88,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 28px;
 .inline-metric:last-child { border-right: none; }
 .inline-metric-val { font-family: var(--mono); font-size: 1.3rem; font-weight: 500; color: var(--accent); letter-spacing: -0.03em; display: block; margin-bottom: 3px; }
 .inline-metric-val.green { color: var(--green); }
+.inline-metric-val.red { color: var(--red); }
 .inline-metric-label { font-family: var(--mono); font-size: 0.68rem; color: var(--text-muted); letter-spacing: 0.05em; }
 
 /* COMPARE TABLE */
@@ -93,6 +97,12 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 28px;
 .compare-table td { padding: 13px 16px; border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); font-family: var(--mono); font-size: 0.83rem; vertical-align: top; }
 .compare-table tr:last-child td { border-bottom: none; }
 .compare-table .row-label { color: var(--text); font-weight: 600; }
+.check { color: var(--green); }
+.cross { color: var(--text-muted); }
+
+/* BACK LINK */
+.back-link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.8rem; color: var(--text-muted); text-decoration: none; border-bottom: none !important; margin-bottom: 64px; transition: color 0.2s; }
+.back-link:hover { color: var(--text-secondary) !important; border-bottom: none !important; }
 
 hr { border: none; border-top: 1px solid var(--border-subtle); margin: 48px 0; }
 
@@ -140,12 +150,12 @@ footer .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; display:
     <div class="post-meta">
       <span class="post-tag">Breakdown</span>
       <span class="meta-sep">/</span>
-      <span class="post-date">May 14, 2026</span>
+      <span class="post-date">May 15, 2026</span>
       <span class="meta-sep">/</span>
-      <span class="post-read">5 min read</span>
+      <span class="post-read">4 min read</span>
     </div>
-    <h1>The library that couldn't<br>read its own <em>output.</em></h1>
-    <p class="post-hero-sub">SymPy generated domain strings it refused to parse back. The bug sat open for 2,094 days. Kodah closed it in 351 seconds, it even covered edge cases nobody reported.</p>
+    <h1>Django should not be leaking<br>your <em>secrets.</em></h1>
+    <p class="post-hero-sub">Django is one of the most widely used web frameworks in Python. Exposing user secrets is a serious vulnerability for a framework of this scale. Kodah closed it in 78 seconds.</p>
   </div>
 </div>
 
@@ -153,33 +163,27 @@ footer .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; display:
 
   <table class="meta-table fade">
     <tbody>
-      <tr><td>Repository</td><td><a href="https://github.com/sympy/sympy/issues/2709" target="_blank" rel="noopener">sympy/sympy · issue #2709</a></td></tr>
-      <tr><td>First opened</td><td>December 24, 2013</td></tr>
-      <tr><td>Merged</td><td>September 17, 2019</td></tr>
-      <tr><td>Real TTR</td><td>~2,094 days</td></tr>
-      <tr><td>Official TTR (second report → merge)</td><td>561 days</td></tr>
-      <tr><td>Kodah runtime</td><td>351.3 seconds</td></tr>
-      <tr><td>Participants · Comments</td><td>6 participants · 9 comments</td></tr>
+      <tr><td>Repository</td><td><a href="https://github.com/django/django/issues/12700" target="_blank" rel="noopener">django/django · issue #12700</a></td></tr>
+      <tr class="severity-row"><td>Severity</td><td>Security — disclosed publicly after review by Django's security team</td></tr>
+      <tr><td>Kodah runtime</td><td>78.4 seconds</td></tr>
     </tbody>
   </table>
 
   <h2 class="fade">The bug</h2>
 
-  <p class="fade">SymPy is one of the most widely used mathematical computing libraries in the Python ecosystem. In late 2013, its maintainer filed <a href="https://github.com/sympy/sympy/issues/2709" target="_blank" rel="noopener">a bug</a> with a single, clear symptom: the library was producing output it refused to accept as input.</p>
+  <p class="fade">When a Django application crashes in debug mode, the framework displays a detailed error page that includes every value in the configuration file: database credentials, API keys, third-party service tokens, anything stored in settings. Django ships with a filter designed to make that page safe: before rendering, it scans every setting and replaces any value whose key matches sensitive patterns with a row of asterisks.</p>
 
-  <p class="fade">Ask SymPy to infer the structure of an expression and it would return a domain string. Hand that exact string back in the very next call and it would crash with an error, claiming the value was invalid. The system was generating notation it couldn't parse: a contradiction hiding in plain sight inside one of the most downloaded scientific packages in Python.</p>
+  <p class="fade">The filter worked correctly for dictionaries, recursing through every level and redacting what it found. What it didn't do was descend into lists, tuples, or sets.</p>
 
   <div class="pullquote fade">
-    <p>The system was generating notation it couldn't parse: a contradiction hiding in plain sight.</p>
+    <p>If a sensitive value was stored inside a list, a completely common structure in Django configuration, the filter returned it untouched.</p>
   </div>
 
-  <p class="fade">The issue sat open, labeled and acknowledged, for years. It was re-reported in 2018 by a different user who hit the same wall, restarting the clock: 561 days this time before the fix was finally merged. The merge was made by the same person who had filed the original report back in 2013.</p>
+  <p class="fade">The filter stopped at the container boundary and passed the entire value through as-is. The redaction it was designed to provide simply didn't happen.</p>
 
   <h2 class="fade">What Kodah did</h2>
 
-  <p class="fade">Kodah located the gap in the domain parser: it recognized real and complex fields as standalone values, but had no logic for when those same fields appeared as the base of a polynomial ring. The input fell through every check and hit the error handler: not because it was malformed, but because that case had simply never been implemented.</p>
-
-  <p class="fade">Before generating the patch, Kodah mapped the full family of affected cases: the short aliases, the precision-suffixed variants, and their complex field equivalents. A fix scoped only to the reported input would have left those variants silently broken.</p>
+  <p class="fade">Kodah identified that the filter's recursion logic covered dictionaries but stopped at other iterable types. The fix required extending that same recursion to lists, tuples, and sets, including arbitrarily nested combinations of them. Kodah also handled the edge case where a set contains unhashable items which would cause a silent failure if reconstructed naively after cleansing.</p>
 
   <hr class="fade">
 
@@ -188,108 +192,97 @@ footer .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; display:
   <div class="code-block fade">
     <div class="code-header">
       <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
-      <span class="code-filename">sympy/polys/domains/polynomialring.py</span>
+      <span class="code-filename">django/views/debug.py</span>
     </div>
     <div class="code-body">
-<span class="diff-add">+            # allow polynomial rings over RR/CC, e.g. 'RR[y,z]' or 'CC_53[x]'</span>
-<span class="diff-add">+            r = re.match(r'^(R|RR|C|CC)(?:_(\d+))?\[(.+)\]$', domain)</span>
-<span class="diff-ctx"> </span>
-<span class="diff-add">+            if r is not None:</span>
-<span class="diff-add">+                ground, prec, gens = r.groups()</span>
-<span class="diff-add">+                gens = list(map(sympify, gens.split(',')))</span>
-<span class="diff-ctx"> </span>
-<span class="diff-add">+                if ground in ['R', 'RR']:</span>
-<span class="diff-add">+                    if prec is None:</span>
-<span class="diff-add">+                        base = sympy.polys.domains.RR</span>
-<span class="diff-add">+                    else:</span>
-<span class="diff-add">+                        base = sympy.polys.domains.RealField(int(prec))</span>
-<span class="diff-add">+                else:</span>
-<span class="diff-add">+                    if prec is None:</span>
-<span class="diff-add">+                        base = sympy.polys.domains.CC</span>
-<span class="diff-add">+                    else:</span>
-<span class="diff-add">+                        base = sympy.polys.domains.ComplexField(int(prec))</span>
-<span class="diff-ctx"> </span>
-<span class="diff-add">+                return base.poly_ring(*gens)</span>
+<span class="diff-add">+            elif isinstance(value, (list, tuple, set)):</span>
+<span class="diff-add">+                def _clean_item(item):</span>
+<span class="diff-add">+                    if isinstance(item, dict):</span>
+<span class="diff-add">+                        return {k: self.cleanse_setting(k, v) for k, v in item.items()}</span>
+<span class="diff-add">+                    if isinstance(item, (list, tuple, set)):</span>
+<span class="diff-add">+                        cleaned = [_clean_item(i) for i in item]</span>
+<span class="diff-add">+                        if isinstance(item, tuple):</span>
+<span class="diff-add">+                            return tuple(cleaned)</span>
+<span class="diff-add">+                        try:</span>
+<span class="diff-add">+                            return set(cleaned) if isinstance(item, set) else cleaned</span>
+<span class="diff-add">+                        except TypeError:</span>
+<span class="diff-add">+                            return cleaned</span>
+<span class="diff-add">+                    return item</span>
     </div>
   </div>
 
-  <h3 class="fade">The human patch — <a href="https://github.com/sympy/sympy/pull/14396" target="_blank" rel="noopener">PR #14396</a></h3>
+  <h3 class="fade">The human patch — <a href="https://github.com/django/django/commit/2c4e0f4" target="_blank" rel="noopener">commit 2c4e0f4</a></h3>
 
   <div class="code-block fade">
     <div class="code-header">
       <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
-      <span class="code-filename">sympy/polys/domains/polynomialring.py</span>
+      <span class="code-filename">django/views/debug.py</span>
     </div>
     <div class="code-body">
-<span class="diff-rem">-    _re_polynomial = re.compile(r"^(Z|ZZ|Q|QQ)\[(.+)\]$")</span>
-<span class="diff-add">+    _re_polynomial = re.compile(r"^(Z|ZZ|Q|QQ|R|RR|C|CC)\[(.+)\]$")</span>
-<span class="diff-ctx"> </span>
-<span class="diff-rem">-                else:</span>
-<span class="diff-add">+                elif ground in ['Q', 'QQ']:</span>
-<span class="diff-ctx">                     return sympy.polys.domains.QQ.poly_ring(*gens)</span>
-<span class="diff-add">+                elif ground in ['R', 'RR']:</span>
-<span class="diff-add">+                    return sympy.polys.domains.RR.poly_ring(*gens)</span>
-<span class="diff-add">+                else:</span>
-<span class="diff-add">+                    return sympy.polys.domains.CC.poly_ring(*gens)</span>
+<span class="diff-add">+            elif isinstance(value, list):</span>
+<span class="diff-add">+                cleansed = [self.cleanse_setting('', v) for v in value]</span>
+<span class="diff-add">+            elif isinstance(value, tuple):</span>
+<span class="diff-add">+                cleansed = tuple([self.cleanse_setting('', v) for v in value])</span>
     </div>
   </div>
 
   <h2 class="fade">How they compare</h2>
 
-  <p class="fade">Both patches fix the reported bug. The human patch touches the minimum amount of code to close the issue as filed. Kodah, however, went further: beyond fixing the original case, it independently identified and handled precision-qualified variants like <code style="font-family:var(--mono);font-size:0.88em;color:var(--accent)">RR_53[x]</code> and <code style="font-family:var(--mono);font-size:0.88em;color:var(--accent)">CC_80[x]</code>, edge cases that were never reported, already covered.</p>
+  <p class="fade">Both patches fix the reported case. The human patch covers lists and tuples at a single level of depth, a direct answer to the issue as filed. Kodah, however, went further: beyond the reported cases, it covered sets, handled arbitrarily nested combinations of all three types recursively, and added a fallback for the edge case of unhashable items inside sets; none of which were in the original report, all of them already handled.</p>
 
   <table class="compare-table fade">
     <thead>
       <tr>
-        <th>Dimension</th>
+        <th>Coverage</th>
         <th>Kodah</th>
-        <th>Human (PR #14396)</th>
+        <th>Human (commit 2c4e0f4)</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td class="row-label">Bug fixed</td>
-        <td>Yes</td>
-        <td>Yes</td>
+        <td class="row-label">Lists</td>
+        <td class="check">✓ Covered</td>
+        <td class="check">✓ Covered</td>
       </tr>
       <tr>
-        <td class="row-label">Precision variants<br><span style="font-size:0.75rem;color:var(--text-muted)">RR_53[x], CC_80[x]</span></td>
-        <td style="color:var(--green);">Covered</td>
-        <td style="color:var(--text-muted);">Not covered</td>
+        <td class="row-label">Tuples</td>
+        <td class="check">✓ Covered</td>
+        <td class="check">✓ Covered</td>
       </tr>
       <tr>
-        <td class="row-label">Approach</td>
-        <td>Full regex + branching over all variants</td>
-        <td>Minimal: extend existing regex + add two branches</td>
+        <td class="row-label">Sets</td>
+        <td class="check">✓ Covered</td>
+        <td class="cross">✗ Not covered</td>
       </tr>
       <tr>
-        <td class="row-label">Time to patch</td>
-        <td style="color:var(--green);">351 seconds</td>
-        <td style="color:var(--text-muted);">561 days (second report → merge)</td>
+        <td class="row-label">Nested iterables</td>
+        <td class="check">✓ Recursive</td>
+        <td class="cross">✗ One level only</td>
+      </tr>
+      <tr>
+        <td class="row-label">Unhashable item fallback</td>
+        <td class="check">✓ Handled</td>
+        <td class="cross">✗ Silent failure</td>
       </tr>
     </tbody>
   </table>
 
   <div class="inline-metrics fade">
     <div class="inline-metric">
-      <span class="inline-metric-val green">351s</span>
+      <span class="inline-metric-val green">78s</span>
       <span class="inline-metric-label">Kodah runtime</span>
     </div>
     <div class="inline-metric">
-      <span class="inline-metric-val">2,094</span>
-      <span class="inline-metric-label">Days open</span>
+      <span class="inline-metric-val red">Security</span>
+      <span class="inline-metric-label">Severity</span>
     </div>
     <div class="inline-metric">
-      <span class="inline-metric-val">Dec 2013</span>
-      <span class="inline-metric-label">First report</span>
-    </div>
-    <div class="inline-metric">
-      <span class="inline-metric-val">Sep 2019</span>
-      <span class="inline-metric-label">Fix merged</span>
+      <span class="inline-metric-val">5</span>
+      <span class="inline-metric-label">Edge cases covered</span>
     </div>
   </div>
 
-  <p class="fade">The bug was open for 2,094 days. Kodah closed it in 351 seconds and didn't go into anyone's queue. <a href="https://kodah.io/">Kodah — $0.50 per fix.</a></p>
+  <p class="fade">A security gap in one of the most widely used frameworks in Python, fixed in 78 seconds. <a href="https://kodah.io/">Kodah — $0.50 per fix.</a></p>
 
   <hr class="fade">
 
