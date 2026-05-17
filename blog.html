@@ -46,6 +46,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 28px;
 .post-item:last-child { border-bottom: 1px solid var(--border-subtle); }
 
 .post-item-tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; display: block; }
+.post-item-tag.lib {color: var(--green); }
 .post-item-title { font-family: var(--serif); font-size: 1.45rem; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 10px; }
 .post-item-title em { font-style: italic; color: var(--accent); }
 .post-item-desc { font-size: 0.93rem; color: var(--text-muted); line-height: 1.65; max-width: 520px; }
@@ -101,6 +102,7 @@ footer .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; display:
     <a href="blog/matplotlib-kernel-restart.html" class="post-item fade">
       <div>
         <span class="post-item-tag">Breakdown</span>
+        <span class="post-item-tag lib">Matplotlib</span>
         <div class="post-item-title">The only fix was<br>restarting the <em>kernel.</em></div>
         <p class="post-item-desc">Django is one of the most widely used web frameworks in Python. Exposing user secrets is a serious vulnerability for a framework of this scale. Kodah closed it in 78 seconds.</p>
       </div>
@@ -113,6 +115,7 @@ footer .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; display:
     <a href="blog/django-debug-leak.html" class="post-item fade">
       <div>
         <span class="post-item-tag">Breakdown</span>
+        <span class="post-item-tag lib">Django</span>
         <div class="post-item-title">Django should not be leaking<br>your <em>secrets.</em></div>
         <p class="post-item-desc">Django is one of the most widely used web frameworks in Python. Exposing user secrets is a serious vulnerability for a framework of this scale. Kodah closed it in 78 seconds.</p>
       </div>
@@ -125,6 +128,7 @@ footer .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; display:
     <a href="blog/sympy-domain-roundtrip.html" class="post-item fade">
       <div>
         <span class="post-item-tag">Breakdown</span>
+        <span class="post-item-tag lib">Sympy</span>
         <div class="post-item-title">The library that couldn't<br>read its own <em>output.</em></div>
         <p class="post-item-desc">SymPy generated domain strings it refused to parse back. The bug sat open for 2,094 days. Kodah closed it in 351 seconds, it even covered edge cases nobody reported.</p>
       </div>
@@ -137,6 +141,7 @@ footer .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; display:
     <a href="blog/firefox-fixing-gap.html" class="post-item fade">
       <div>
         <span class="post-item-tag">Case Study</span>
+        <span class="post-item-tag lib">Firefox</span>
         <div class="post-item-title">Firefox showed what AI can find.<br>The <em>fixing gap</em> is real.</div>
         <p class="post-item-desc">Mozilla used Claude Mythos Preview to find 271 bugs in Firefox. We ran Kodah on two of them: real open bugs, public repo. One had been open for three months.</p>
       </div>
