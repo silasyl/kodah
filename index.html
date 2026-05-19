@@ -57,6 +57,8 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
 .hero h1 { font-family: var(--serif); font-size: clamp(3rem, 6.5vw, 5.2rem); line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin-top: 0; margin-bottom: 28px; position: relative; z-index: 2; animation: fadeInDown 0.6s ease 0.1s both; }
 .hero h1 em { font-style: italic; color: var(--accent); }
 .hero-sub { font-size: 1.18rem; color: var(--text-secondary); max-width: 620px; margin: 0 auto 48px; line-height: 1.7; position: relative; z-index: 2; animation: fadeInDown 0.6s ease 0.2s both; }
+.hero-langs { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: -28px; margin-bottom: 48px; position: relative; z-index: 2; animation: fadeInDown 0.6s ease 0.25s both; }
+.lang-tag { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--accent); background: var(--accent-glow); border: 1px solid rgba(255, 126, 103, 0.15); padding: 4px 12px; border-radius: 100px; }
 .hero-actions { display: flex; gap: 16px; justify-content: center; position: relative; z-index: 2; animation: fadeInDown 0.6s ease 0.3s both; }
 .btn-primary { font-family: var(--mono); font-size: 0.9rem; font-weight: 500; color: var(--bg); background: var(--accent); border: none; padding: 14px 32px; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.25s; letter-spacing: 0.01em; }
 .btn-primary:hover { background: #00ff8a; box-shadow: 0 0 30px var(--green-glow-strong); transform: translateY(-1px); }
@@ -166,6 +168,8 @@ nav .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: 
 .benchmark-val-details { display: flex; flex-direction: column; gap: 10px; }
 .benchmark-val-detail { font-size: 0.88rem; color: var(--text-secondary); display: flex; gap: 10px; line-height: 1.5; }
 .benchmark-val-detail::before { content: '→'; color: var(--accent); font-family: var(--mono); font-size: 0.82rem; flex-shrink: 0; margin-top: 1px; }
+.benchmark-val-langs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+.benchmark-val-lang { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.05em; color: var(--accent); background: var(--accent-glow); border: 1px solid rgba(255,126,103,0.15); padding: 3px 10px; border-radius: 100px; }
 
 .pricing-section h2 { font-family: var(--serif); font-size: 2.8rem; text-align: center; letter-spacing: -0.02em; margin-bottom: 12px; }
 .pricing-section h2 em { font-style: italic; color: var(--accent); }
@@ -271,6 +275,12 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
       Kodah does the hard part autonomously: you just review the diff and merge.
       Send a repo URL and an issue. Get a production-ready patch back.
     </p>
+    <div class="hero-langs">
+      <span class="lang-tag">Python</span>
+      <span class="lang-tag">JavaScript</span>
+      <span class="lang-tag">TypeScript</span>
+      <span class="lang-tag">Java</span>
+    </div>
     <div class="hero-actions">
       <a href="register.html" class="btn-primary">Get Started →</a>
       <a href="#benchmark" class="btn-secondary">See the Numbers</a>
@@ -291,7 +301,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
   <div class="container">
     <div class="code-text reveal">
       <h2>One API call.<br>A production-ready <em>patch.</em></h2>
-      <p>Send an issue description and a repo URL, public or private, any Python codebase. Kodah processes it using a proprietary orchestration engine and returns a unified diff. That's the entire interface.</p>
+      <p>Send an issue description and a repo URL, public or private, any Python, JavaScript, TypeScript, or Java codebase. Kodah processes it using a proprietary orchestration engine and returns a unified diff. That's the entire interface.</p>
       <p>No IDE plugins. No codebase uploads. No configuration. No babysitting. Your engineers spend their time on the 5-minute review, not the 45-minute investigation.</p>
     </div>
     <div class="code-block reveal">
@@ -345,9 +355,9 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
     <h2 class="reveal">Not another <em>autocomplete.</em></h2>
     <p class="moat-sub reveal">Other tools assist your engineers. Kodah replaces the investigation entirely: delivering a structured, production-ready patch that's ready to review.</p>
     <div class="moat-grid">
-      <div class="moat-card reveal"><div class="moat-icon">🧠</div><h3>Context, Not Brute Force</h3><p>Instead of dumping raw files into a prompt, Kodah builds a precise structural understanding of your codebase. Better input beats a bigger model.</p></div>
+      <div class="moat-card reveal"><div class="moat-icon">🧠</div><h3>Context, Not Brute Force</h3><p>Instead of dumping raw files into a prompt, Kodah builds a precise structural understanding of your codebase across Python, JavaScript, TypeScript, and Java. Better input beats a bigger model.</p></div>
       <div class="moat-card reveal"><div class="moat-icon">🎯</div><h3>First-Attempt Accuracy</h3><p>Valid, reviewable patches on the first attempt, 93% of the time. No babysitting required.</p></div>
-      <div class="moat-card reveal"><div class="moat-icon">✅</div><h3>Multi-Benchmark Validated</h3><p>Independently evaluated on SWE-bench Lite and SWE-PolyBench Verified: across 17 production Python repositories including scikit-learn, transformers and langchain.</p></div>
+      <div class="moat-card reveal"><div class="moat-icon">✅</div><h3>Multi-Benchmark Validated</h3><p>Independently evaluated on SWE-bench Lite and SWE-PolyBench Verified: across 21 production repositories in Python, JavaScript, TypeScript, and Java.</p></div>
       <div class="moat-card reveal"><div class="moat-icon">🔒</div><h3>Your Code Stays Yours</h3><p>Source code is processed in an isolated environment and never stored. Analysis artifacts are automatically discarded after the session.</p></div>
       <div class="moat-card reveal"><div class="moat-icon">⚡</div><h3>CI/CD Native</h3><p>Pure HTTP API. Plug Kodah into your GitHub Actions, GitLab pipelines, or any webhook workflow. No plugins, no IDE dependencies.</p></div>
       <div class="moat-card reveal"><div class="moat-icon">💳</div><h3>Pay Per Fix</h3><p>$0.50 per resolved issue. No monthly commitment, no seat licensing. Your team fixes 2 bugs or 2,000: you pay exactly for what you use.</p></div>
@@ -387,7 +397,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
         </tbody>
       </table>
     </div>
-    <p class="benchmark-note reveal">Resolve rates from public benchmarks and official leaderboards.<br>Kodah evaluated on SWE-bench Lite (300 issues, 81% of the current leader) and SWE-PolyBench Verified (113 issues, 4th globally in Python).<br>Dev time estimates reflect total developer effort per bug including investigation, iteration, and review.</p>
+    <p class="benchmark-note reveal">Resolve rates from public benchmarks and official leaderboards.<br>Kodah evaluated on SWE-bench Lite (300 issues, 81% of the current leader) and SWE-PolyBench Verified (382 issues, 4th globally across 4 languages).<br>Dev time estimates reflect total developer effort per bug including investigation, iteration, and review.</p>
   </div>
 </section>
 
@@ -399,21 +409,31 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
       <div class="benchmark-val-card reveal">
         <div class="benchmark-val-org">Princeton NLP · OpenAI</div>
         <div class="benchmark-val-title">SWE-bench Lite</div>
-        <div class="benchmark-val-result">51%</div>
-        <div class="benchmark-val-result-label">Resolve rate · 300 issues</div>
+        <div class="benchmark-val-langs">
+          <span class="benchmark-val-lang">Python</span>
+        </div>
+        <div class="benchmark-val-result">81%</div>
+        <div class="benchmark-val-result-label">of the resolve rate of the current leader</div>
         <div class="benchmark-val-details">
-          <div class="benchmark-val-detail">81% of the resolve rate of the current leader</div>
-          <div class="benchmark-val-detail">djando/django, scikit-learn/scikit-learn, psf/requests and 9 more</div>
+          <div class="benchmark-val-detail">51% resolve rate · 300 issues</div>
+          <div class="benchmark-val-detail">django/django, scikit-learn/scikit-learn, psf/requests and 9 more</div>
         </div>
       </div>
       <div class="benchmark-val-card reveal">
         <div class="benchmark-val-org">Amazon Science</div>
         <div class="benchmark-val-title">SWE-PolyBench Verified</div>
+        <div class="benchmark-val-langs">
+          <span class="benchmark-val-lang">Python</span>
+          <span class="benchmark-val-lang">JavaScript</span>
+          <span class="benchmark-val-lang">TypeScript</span>
+          <span class="benchmark-val-lang">Java</span>
+        </div>
         <div class="benchmark-val-result">#4</div>
-        <div class="benchmark-val-result-label">Global Python ranking · 113 issues</div>
+        <div class="benchmark-val-result-label">Global ranking · 382 issues · 4 languages</div>
         <div class="benchmark-val-details">
-          <div class="benchmark-val-detail">32.74% resolve rate across 5 production repositories</div>
-          <div class="benchmark-val-detail">huggingface/transformers, keras-team/keras, langchain-ai/langchain and more</div>
+          <div class="benchmark-val-detail">3rd in both TypeScript and JavaScript</div>
+          <div class="benchmark-val-detail">2nd in class-scope bug resolution globally</div>
+          <div class="benchmark-val-detail">microsoft/vscode, sveltejs/svelte, mui/material-ui, huggingface/transformers and more</div>
         </div>
         <a href="https://amazon-science.github.io/SWE-PolyBench/" target="_blank" rel="noopener" style="display:inline-block; margin-top:24px; font-family:var(--mono); font-size:0.78rem; color:var(--text-muted); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">View leaderboard →</a>
       </div>
